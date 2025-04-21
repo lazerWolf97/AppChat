@@ -15,7 +15,7 @@ public class UsuarioDTO {
 	@JsonProperty("email")
 	private String email;
 	
-	@JsonProperty("fecha_nacimiento")
+	@JsonProperty("fnacimiento")
 	private String fnacimiento;
 	
 	public UsuarioDTO() {
@@ -25,11 +25,11 @@ public class UsuarioDTO {
 		fnacimiento = null;
 	}
 	
-	public UsuarioDTO(String numTLF, String nombre, String email, String fnacimiento) {
+	public UsuarioDTO(String numTLF, String nombre, String email, String fNacimiento) {
 		this.numTLF = numTLF;
 		this.nombre = nombre;
 		this.email = email;
-		this.fnacimiento = fnacimiento;
+		this.fnacimiento = fNacimiento;
 	}
 	
 	public String getNumTLF() {
@@ -44,7 +44,7 @@ public class UsuarioDTO {
 		return email;
 	}
 	
-	public String getFNacimiento() {
+	public String getFnacimiento() {
 		return fnacimiento;
 	}
 	
@@ -56,11 +56,11 @@ public class UsuarioDTO {
 		this.nombre = nombre;
 	}
 	
-	public void setApellidos(String email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 	
-	public void setFNacimiento(String fNacimiento) {
+	public void setFnacimiento(String fNacimiento) {
 		this.fnacimiento = fNacimiento;
 	}
 }

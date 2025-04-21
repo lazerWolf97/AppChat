@@ -17,7 +17,7 @@ public class MensajeController {
 	@Autowired
 	private MensajeService service;
 	
-	@GetMapping("/usuarios")
+	@GetMapping
 	public List<MensajeDTO> findAll(){
 		return service.findAll();
 	}

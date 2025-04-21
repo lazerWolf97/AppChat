@@ -9,23 +9,23 @@ import umu.tds.AppChat.dto.GrupoDTO;
 import umu.tds.AppChat.service.GrupoService;
 
 @RestController
-@RequestMapping("/appchat/contactos")
+@RequestMapping("/appchat/contactos/grupos")
 public class GrupoController {
 
 	@Autowired
 	private GrupoService service;
 	
-	@GetMapping("/grupos")
+	@GetMapping
 	public List<GrupoDTO> findAll() {
 		return service.findAll();
 	}
 	
-	@GetMapping("/grupos/name={name}")
+	@GetMapping("/{name}")
 	public List<GrupoDTO> findByName(String name) {
 		return service.findByName(name);
 	}
 	
-	@PostMapping("/grupos/add")
+	@PostMapping("/add")
 	public void add(@RequestBody GrupoDTO g) {
 		service.add(g);
 	}

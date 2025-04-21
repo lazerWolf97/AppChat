@@ -46,7 +46,7 @@ public class UsuarioRepository implements UsuarioDAO {
 	
 	@Override
 	public void delete(String ID) {
-		em.createQuery("delete u from Usuario where u.numTLF like :id").setParameter("id", ID).executeUpdate();
+		em.createQuery("delete from Usuario u where u.numTLF like :id").setParameter("id", ID).executeUpdate();
 	}
 	
 	

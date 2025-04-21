@@ -10,33 +10,33 @@ import umu.tds.AppChat.dto.UsuarioPostDTO;
 import umu.tds.AppChat.service.UsuarioService;
 
 @RestController
-@RequestMapping("/appchat")
+@RequestMapping("/appchat/usuarios")
 public class UsuarioController {
 
 	@Autowired
 	private UsuarioService service;
 	
-	@GetMapping("/usuarios")
+	@GetMapping
 	public List<UsuarioDTO> findAll(){
 		return service.findAll();
 	}
 	
-	@GetMapping("/usuarios/id={userID}")
+	@GetMapping("/{userID}")
 	public UsuarioDTO findByID(@PathVariable String userID) {
 		return service.findByID(userID);
 	}
 	
-	@PostMapping("/usuarios/add")
+	@PostMapping("/add")
 	public void add(@RequestBody UsuarioPostDTO u) {
 		service.add(u);
 	}
 	
-	@PostMapping("/usuarios/update")
+	@PutMapping("/update")
 	public void update(@RequestBody UsuarioPostDTO u) {
 		service.update(u);
 	}
 	
-	@DeleteMapping("/usuarios/delete/id={userID}")
+	@DeleteMapping("/delete/{userID}")
 	public void delete(@PathVariable String userID) {
 		service.delete(userID);
 	}

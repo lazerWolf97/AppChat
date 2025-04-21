@@ -21,8 +21,8 @@ public class Usuario {
 	private String email;
 	@Column(name="password")
 	private String password;
-	@Column(name="fecha_nacimiento")
-	private LocalDate fNacimiento;
+	@Column(name="fnacimiento")
+	private LocalDate fnacimiento;
 	
 	@OneToMany
 	@JoinColumn(name="contactos")
@@ -39,7 +39,7 @@ public class Usuario {
 		this.nombre = nombre;
 		this.email = email;
 		this.password = password;
-		this.fNacimiento = LocalDate.parse(fNacimiento);
+		this.fnacimiento = LocalDate.parse(fNacimiento);
 		this.contactos = new LinkedList<Contacto>();
 		this.enviados = new LinkedList<Mensaje>();
 		this.recibidos = new LinkedList<Mensaje>();
@@ -50,7 +50,7 @@ public class Usuario {
 		this.nombre = nombre;
 		this.email = email;
 		this.password = password;
-		this.fNacimiento = LocalDate.of(año, mes, dia);
+		this.fnacimiento = LocalDate.of(año, mes, dia);
 		this.contactos = new LinkedList<Contacto>();
 		this.enviados = new LinkedList<Mensaje>();
 		this.recibidos = new LinkedList<Mensaje>();
@@ -76,8 +76,8 @@ public class Usuario {
 		return password;
 	}
 
-	public LocalDate getfNacimiento() {
-		return fNacimiento;
+	public LocalDate getFnacimiento() {
+		return fnacimiento;
 	}
 
 	public void setNumTLF(String numTLF) {
@@ -96,8 +96,8 @@ public class Usuario {
 		this.password = password;
 	}
 
-	public void setfNacimiento(String fNacimiento) {
-		this.fNacimiento = LocalDate.parse(fNacimiento);
+	public void setFnacimiento(String fNacimiento) {
+		this.fnacimiento = LocalDate.parse(fNacimiento);
 	}
 	
 	public Optional<ContactoIndividual> getContactoIndividual(Usuario u) {
