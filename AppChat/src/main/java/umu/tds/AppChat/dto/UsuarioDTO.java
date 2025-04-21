@@ -1,0 +1,66 @@
+package umu.tds.AppChat.dto;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sun.istack.NotNull;
+
+public class UsuarioDTO {
+	
+	@NotNull
+	@JsonProperty("numTLF")
+	private String numTLF;
+	
+	@JsonProperty("nombre")
+	private String nombre;
+	
+	@JsonProperty("email")
+	private String email;
+	
+	@JsonProperty("fecha_nacimiento")
+	private String fnacimiento;
+	
+	public UsuarioDTO() {
+		numTLF = null;
+		nombre = null;
+		email = null;
+		fnacimiento = null;
+	}
+	
+	public UsuarioDTO(String numTLF, String nombre, String email, String fnacimiento) {
+		this.numTLF = numTLF;
+		this.nombre = nombre;
+		this.email = email;
+		this.fnacimiento = fnacimiento;
+	}
+	
+	public String getNumTLF() {
+		return numTLF;
+	}
+	
+	public String getNombre() {
+		return nombre;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+	
+	public String getFNacimiento() {
+		return fnacimiento;
+	}
+	
+	public void setNumTLF(String numTLF) {
+		this.numTLF = numTLF;
+	}
+	
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
+	public void setApellidos(String email) {
+		this.email = email;
+	}
+	
+	public void setFNacimiento(String fNacimiento) {
+		this.fnacimiento = fNacimiento;
+	}
+}
