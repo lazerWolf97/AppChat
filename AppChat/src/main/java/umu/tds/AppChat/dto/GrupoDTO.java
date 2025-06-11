@@ -7,14 +7,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class GrupoDTO extends ContactoDTO {
 
 	@JsonProperty("usuarios")
-	private List<String> usuarios;
+	private List<UsuarioDTO> usuarios;
 	
 	public GrupoDTO() {
 		super();
 		usuarios = null;
 	}
 	
-	public GrupoDTO(String id, String nombre, List<String> usuarios) {
+	public GrupoDTO(String id, String nombre, List<UsuarioDTO> usuarios) {
 		super(id, nombre);
 		this.usuarios = usuarios;
 	}

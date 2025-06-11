@@ -12,8 +12,7 @@ import umu.tds.dominio.*;
 public interface MapStructMapper {
 
 	public UsuarioDTO getDTO(Usuario u);
-	public UsuarioPostDTO getPostDTO(Usuario u);
-	public Usuario getUsuario(UsuarioPostDTO uDTO);
+	public Usuario getUsuario(UsuarioDTO uDTO);
 	
 	public MensajeDTO getDTO(Mensaje m);
 	public Mensaje getMensaje(MensajeDTO mDTO);

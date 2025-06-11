@@ -68,6 +68,26 @@ public class Mensaje implements Comparable<Mensaje> {
 		return receptor;
 	}
 
+	public void setTexto(String texto) {
+		this.texto = texto;
+	}
+
+	public void setFecha(LocalDate fecha) {
+		this.fecha = fecha;
+	}
+
+	public void setHora(LocalTime hora) {
+		this.hora = hora;
+	}
+
+	public void setEmisor(Usuario emisor) {
+		this.emisor = emisor;
+	}
+
+	public void setReceptor(Usuario receptor) {
+		this.receptor = receptor;
+	}
+
 	@Override
 	public int compareTo(Mensaje o) {
 		int compfecha = fecha.compareTo(o.getFecha());

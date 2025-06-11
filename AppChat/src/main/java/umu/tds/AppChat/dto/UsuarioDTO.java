@@ -18,18 +18,23 @@ public class UsuarioDTO {
 	@JsonProperty("fnacimiento")
 	private String fnacimiento;
 	
+	@JsonProperty("password")
+	private String password;
+	
 	public UsuarioDTO() {
 		numTLF = null;
 		nombre = null;
 		email = null;
 		fnacimiento = null;
+		password = null;
 	}
 	
-	public UsuarioDTO(String numTLF, String nombre, String email, String fNacimiento) {
+	public UsuarioDTO(String numTLF, String nombre, String email, String fNacimiento, String password) {
 		this.numTLF = numTLF;
 		this.nombre = nombre;
 		this.email = email;
 		this.fnacimiento = fNacimiento;
+		this.password = password;
 	}
 	
 	public String getNumTLF() {
@@ -48,6 +53,10 @@ public class UsuarioDTO {
 		return fnacimiento;
 	}
 	
+	public String getPassword() {
+		return password;
+	}
+	
 	public void setNumTLF(String numTLF) {
 		this.numTLF = numTLF;
 	}
@@ -62,5 +71,9 @@ public class UsuarioDTO {
 	
 	public void setFnacimiento(String fNacimiento) {
 		this.fnacimiento = fNacimiento;
+	}
+	
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

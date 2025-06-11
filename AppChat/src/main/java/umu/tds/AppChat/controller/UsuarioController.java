@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import umu.tds.AppChat.dto.UsuarioDTO;
-import umu.tds.AppChat.dto.UsuarioPostDTO;
 import umu.tds.AppChat.service.UsuarioService;
 
 @RestController
@@ -27,12 +26,12 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("/add")
-	public void add(@RequestBody UsuarioPostDTO u) {
+	public void add(@RequestBody UsuarioDTO u) {
 		service.add(u);
 	}
 	
 	@PutMapping("/update")
-	public void update(@RequestBody UsuarioPostDTO u) {
+	public void update(@RequestBody UsuarioDTO u) {
 		service.update(u);
 	}
 	

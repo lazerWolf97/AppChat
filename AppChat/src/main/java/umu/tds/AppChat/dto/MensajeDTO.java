@@ -3,8 +3,6 @@ package umu.tds.AppChat.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
 
-import umu.tds.dominio.Usuario;
-
 public class MensajeDTO {
 
 	@NotNull
@@ -21,10 +19,10 @@ public class MensajeDTO {
 	private String hora;
 	
 	@JsonProperty("emisor")
-	private Usuario emisor;
+	private UsuarioDTO emisor;
 	
 	@JsonProperty("receptor")
-	private Usuario receptor;
+	private UsuarioDTO receptor;
 
 	public MensajeDTO() {
 		this.id = null;
@@ -35,7 +33,8 @@ public class MensajeDTO {
 		this.receptor = null;
 	}
 	
-	public MensajeDTO(String id, String texto, String fecha, String hora, Usuario emisor, Usuario receptor) {
+	public MensajeDTO(String id, String texto, String fecha, String hora,
+			UsuarioDTO emisor, UsuarioDTO receptor) {
 		this.id = id;
 		this.texto = texto;
 		this.fecha = fecha;
@@ -60,16 +59,12 @@ public class MensajeDTO {
 		return hora;
 	}
 
-	public Usuario getEmisor() {
+	public UsuarioDTO getEmisor() {
 		return emisor;
 	}
 
-	public Usuario getReceptor() {
+	public UsuarioDTO getReceptor() {
 		return receptor;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public void setTexto(String texto) {
@@ -84,11 +79,11 @@ public class MensajeDTO {
 		this.hora = hora;
 	}
 
-	public void setEmisor(Usuario emisor) {
+	public void setEmisor(UsuarioDTO emisor) {
 		this.emisor = emisor;
 	}
 
-	public void setReceptor(Usuario receptor) {
+	public void setReceptor(UsuarioDTO receptor) {
 		this.receptor = receptor;
 	}
 	

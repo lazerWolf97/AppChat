@@ -23,8 +23,10 @@ public class GrupoApp implements GrupoService {
 
 	@Override
 	public List<GrupoDTO> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Grupo> lg = repository.findAll();
+		List<GrupoDTO> lgDTO = new LinkedList<GrupoDTO>();
+		lg.stream().forEach(g -> lgDTO.add(mapper.getDTO(g)));
+		return lgDTO;
 	}
 
 	@Override

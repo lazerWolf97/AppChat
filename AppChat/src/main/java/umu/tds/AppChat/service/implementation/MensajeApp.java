@@ -38,7 +38,6 @@ public class MensajeApp implements MensajeService {
 
 	@Override
 	public void add(MensajeDTO m) {
-		// TODO Auto-generated method stub
-		
+		repository.add(mapper.getMensaje(m));
 	}
 }

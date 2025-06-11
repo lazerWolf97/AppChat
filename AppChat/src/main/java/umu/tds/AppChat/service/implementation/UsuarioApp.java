@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import umu.tds.AppChat.dao.UsuarioDAO;
 import umu.tds.AppChat.dto.UsuarioDTO;
-import umu.tds.AppChat.dto.UsuarioPostDTO;
 import umu.tds.AppChat.dto.mappers.MapStructMapper;
 import umu.tds.AppChat.service.UsuarioService;
 import umu.tds.dominio.*;
@@ -32,12 +31,12 @@ public class UsuarioApp implements UsuarioService {
 	}
 
 	@Override
-	public void add(UsuarioPostDTO u) {
+	public void add(UsuarioDTO u) {
 		repository.add(mapper.getUsuario(u));
 	}
 
 	@Override
-	public void update(UsuarioPostDTO u) {
+	public void update(UsuarioDTO u) {
 		repository.update(mapper.getUsuario(u));
 	}
 
