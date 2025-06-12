@@ -41,6 +41,11 @@ public class GrupoApp implements GrupoService {
 	public void add(GrupoDTO g) {
 		repository.add(mapper.getGrupo(g));
 	}
+
+	@Override
+	public void delete(String ID) {
+		repository.delete(ID);
+	}
 	
 	
 }

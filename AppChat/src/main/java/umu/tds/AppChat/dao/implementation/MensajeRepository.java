@@ -34,5 +34,10 @@ public class MensajeRepository implements MensajeDAO {
 	public void add(Mensaje m) {
 		em.persist(m);
 	}
+	
+	@Override
+	public void delete(String ID) {
+		em.createQuery("delete from Mensaje m where m.id like :id").setParameter("id", ID).executeUpdate();
+	}
 
 }

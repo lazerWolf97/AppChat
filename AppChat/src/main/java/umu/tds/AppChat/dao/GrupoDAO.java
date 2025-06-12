@@ -12,4 +12,5 @@ public interface GrupoDAO {
 	List<Grupo> findAll();
 	List<Grupo> findByName(String name);
 	void add(Grupo g);
+	void delete(String ID);
 }

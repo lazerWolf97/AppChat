@@ -7,5 +7,6 @@ import umu.tds.dominio.Contacto;
 public interface ContactoDAO {
 
 	List<Contacto> findAll();
-	void add(Contacto c);
+	List<Contacto> findByName(String name);
+	
 }

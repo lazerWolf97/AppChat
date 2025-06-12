@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import umu.tds.AppChat.dao.ContactoDAO;
 import umu.tds.dominio.Contacto;
 
+@SuppressWarnings("unchecked")
 @Repository
 @Transactional
 public class ContactoRepository implements ContactoDAO {
@@ -18,16 +19,14 @@ public class ContactoRepository implements ContactoDAO {
 	@PersistenceContext
 	private EntityManager em;
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Contacto> findAll() {
 		return em.createQuery("from Contacto").getResultList();
 	}
 
 	@Override
-	public void add(Contacto c) {
-		em.persist(c);
+	public List<Contacto> findByName(String name) {
+		return em.createQuery("select c from Contacto c where c.nombre like :name")
+				.setParameter("name", name).getResultList();
 	}
-	
-	
 }

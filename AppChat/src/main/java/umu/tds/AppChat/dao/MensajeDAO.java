@@ -12,4 +12,5 @@ public interface MensajeDAO {
 	List<Mensaje> findAll();
 	List<Mensaje> findByUser(String userID);
 	void add(Mensaje m);
+	void delete(String ID);
 }

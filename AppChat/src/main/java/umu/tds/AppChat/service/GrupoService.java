@@ -9,5 +9,6 @@ public interface GrupoService {
 	public List<GrupoDTO> findAll();
 	public List<GrupoDTO> findByName(String name);
 	public void add(GrupoDTO g);
+	public void delete(String ID);
 	
 }
