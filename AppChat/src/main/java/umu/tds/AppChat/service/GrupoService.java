@@ -2,13 +2,13 @@ package umu.tds.AppChat.service;
 
 import java.util.List;
 
-import umu.tds.AppChat.dto.GrupoDTO;
+import umu.tds.dominio.Grupo;
 
 public interface GrupoService {
 
-	public List<GrupoDTO> findAll();
-	public List<GrupoDTO> findByName(String name);
-	public void add(GrupoDTO g);
+	public List<Grupo> findAll();
+	public List<Grupo> findByName(String name);
+	public void add(Grupo g);
 	public void delete(String ID);
 	
 }

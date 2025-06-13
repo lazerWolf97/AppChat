@@ -1,6 +1,5 @@
 package umu.tds.AppChat.service.implementation;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,58 +7,67 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import umu.tds.AppChat.dao.UsuarioDAO;
-import umu.tds.AppChat.dto.UsuarioDTO;
-import umu.tds.AppChat.dto.mappers.MapStructMapper;
 import umu.tds.AppChat.service.UsuarioService;
-import umu.tds.dominio.*;
+import umu.tds.dominio.Usuario;
+import umu.tds.exceptions.UserException;
+import umu.tds.exceptions.UserException.UserErrorType;
 
 @Service
 public class UsuarioApp implements UsuarioService {
 
 	@Autowired
 	private UsuarioDAO repository;
+
+	@Override
+	public List<Usuario> findAll() {
+		return repository.findAll();
+	}
+
+	@Override
+	public Optional<Usuario> login(String numTLF, String password) {
+		Optional<Usuario> u = repository.findByID(numTLF);
+		
+		if(u.isEmpty())
+			throw new UserException("Usuario no encontrado.", UserErrorType.LOGINID);
+		
+		if(password.compareTo(u.get().getPassword()) != 0) 
+			throw new UserException("Contraseña incorrecta.", UserErrorType.LOGINPASSWORD);
+		
+		return u;
+	}
+
+	@Override
+	public void registrar(Usuario u) {
+		Optional<Usuario> uopt = repository.findByID(u.getNumTLF());
+		if(uopt.isPresent())
+			throw new UserException("Ya existe un usuario con ese número.", UserErrorType.SIGNUPALREADYEXISTS);
+		repository.add(u);
+	}
+
+	@Override
+	public void update(Usuario u) {
+		repository.update(u);
+	}
+
+	@Override
+	public Optional<Usuario> findByNumTLF(String numTLF) {
+		Optional<Usuario> uopt = repository.findByID(numTLF);
+		if(uopt.isEmpty())
+			throw new UserException("Usuario no encontrado.", UserErrorType.USERNOTFOUND);
+		return uopt;
+	}
+
+	@Override
+	public List<Usuario> findByName(String name) {
+		// Lanzar excepcion?  UserException("Usuario no encontrado.", UserErrorType.USERNOTFOUND)
+		return repository.findByName(name);
+	}
+
+	@Override
+	public void delete(String numTLF) {
+		repository.delete(numTLF);
+	}
 	
-	@Autowired
-	private MapStructMapper mapper;
 	
-	@Override
-	public List<UsuarioDTO> findAll() {
-		List<Usuario> lu = repository.findAll();
-		List<UsuarioDTO> ludto = new ArrayList<UsuarioDTO>();
-		lu.stream().forEach(u -> ludto.add(mapper.getDTO(u)));
-		return ludto;
-	}
-
-	@Override
-	public void add(UsuarioDTO u) {
-		repository.add(mapper.getUsuario(u));
-	}
-
-	@Override
-	public void update(UsuarioDTO u) {
-		repository.update(mapper.getUsuario(u));
-	}
-
-	@Override
-	public UsuarioDTO findByID(String ID) {
-		Optional<Usuario> p = repository.findByID(ID);
-		if(!p.isPresent()) {
-			throw new RuntimeException("Error: Usuario con ID " + ID + " no encontrado.");
-		}
-		return mapper.getDTO(p.get());
-	}
-
-	@Override
-	public List<UsuarioDTO> findByName(String NAME) {
-		List<Usuario> p = repository.findByName(NAME);
-		List<UsuarioDTO> pnew = new ArrayList<UsuarioDTO>();
-		p.stream().forEach(u -> pnew.add(mapper.getDTO(u)));
-		return pnew;
-	}
-
-	@Override
-	public void delete(String ID) {
-		repository.delete(ID);
-	}
-
+	
 }

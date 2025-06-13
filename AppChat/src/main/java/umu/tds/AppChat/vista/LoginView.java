@@ -15,6 +15,9 @@ import javax.swing.BoxLayout;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.border.TitledBorder;
+
+import umu.tds.AppChat.controller.LoginController;
+
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.JButton;
@@ -24,27 +27,14 @@ public class LoginView {
 	private JFrame frmAppchatLogin;
 	private JTextField textField_tlf;
 	private JPasswordField passwordField;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					LoginView window = new LoginView();
-					window.frmAppchatLogin.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
+	private LoginController controller;
 
 	/**
 	 * Create the application.
 	 */
-	public LoginView() {
+	public LoginView(LoginController controller) {
+		this.controller = controller;
 		initialize();
 	}
 	
@@ -140,6 +130,7 @@ public class LoginView {
 		
 		addManejadorSalir(btn_salir);
 		addManejadorSignup(btn_signup);
+		addManejadorAceptar(btn_aceptar);
 	}
 
 	
@@ -166,6 +157,11 @@ public class LoginView {
 		btn_aceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Comprobar Login
+				boolean success = 
+						controller.checkLogin(textField_tlf.getText(), new String(passwordField.getPassword()));
+				if(!success) {
+					
+				}
 			}
 		});
 	}

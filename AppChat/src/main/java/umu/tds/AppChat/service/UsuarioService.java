@@ -1,14 +1,16 @@
 package umu.tds.AppChat.service;
 
 import java.util.List;
+import java.util.Optional;
 
-import umu.tds.AppChat.dto.UsuarioDTO;
+import umu.tds.dominio.Usuario;
 
 public interface UsuarioService {
-	public List<UsuarioDTO> findAll();
-	public void add(UsuarioDTO u);
-	public void update(UsuarioDTO u);
-	public UsuarioDTO findByID(String ID);
-	public List<UsuarioDTO> findByName(String NAME);
-	public void delete(String ID);
+	public List<Usuario> findAll();
+	public Optional<Usuario> login(String numTLF, String password);
+	public void registrar(Usuario u);
+	public void update(Usuario u);
+	public Optional<Usuario> findByNumTLF(String numTLF);
+	public List<Usuario> findByName(String name);
+	public void delete(String numTLF);
 }
