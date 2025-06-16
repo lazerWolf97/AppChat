@@ -40,6 +40,10 @@ public class GrupoView {
 	public GrupoView() {
 		initialize();
 	}
+	
+	public void showWindow() {
+		
+	}
 
 	/**
 	 * Initialize the contents of the frame.

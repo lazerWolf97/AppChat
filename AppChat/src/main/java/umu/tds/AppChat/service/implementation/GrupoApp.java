@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import umu.tds.AppChat.dao.GrupoDAO;
 import umu.tds.AppChat.service.GrupoService;
 import umu.tds.dominio.Grupo;
+import umu.tds.exceptions.UserException;
+import umu.tds.exceptions.UserException.UserErrorType;
 
 @Service
 public class GrupoApp implements GrupoService {
@@ -18,29 +20,25 @@ public class GrupoApp implements GrupoService {
 
 	@Override
 	public List<Grupo> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.findAll();
 	}
 
 	@Override
 	public List<Grupo> findByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Grupo> lf = repository.findByName(name);
+		if(lf.isEmpty())
+			throw new UserException("No existe un grupo con ese nombre.", UserErrorType.USERNOTFOUND);
+		return lf;
 	}
 
 	@Override
 	public void add(Grupo g) {
-		// TODO Auto-generated method stub
-		
+		repository.add(g);
 	}
 
 	@Override
 	public void delete(String ID) {
-		// TODO Auto-generated method stub
-		
+		repository.delete(ID);
 	}
-	
-
-	
 	
 }

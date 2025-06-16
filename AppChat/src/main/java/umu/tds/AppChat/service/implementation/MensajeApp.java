@@ -19,20 +19,17 @@ public class MensajeApp implements MensajeService {
 
 	@Override
 	public List<Mensaje> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.findAll();
 	}
 
 	@Override
 	public List<Mensaje> findAllByUsername(String userID) {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.findByUser(userID);
 	}
 
 	@Override
 	public void add(Mensaje m) {
-		// TODO Auto-generated method stub
-		
+		repository.add(m);
 	}
 
 }

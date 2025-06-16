@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import umu.tds.AppChat.dao.ContactoIndividualDAO;
 import umu.tds.AppChat.service.ContactoIndividualService;
 import umu.tds.dominio.ContactoIndividual;
+import umu.tds.exceptions.UserException;
+import umu.tds.exceptions.UserException.UserErrorType;
 
 @Service
 public class ContactoIndividualApp implements ContactoIndividualService {
@@ -17,26 +19,25 @@ public class ContactoIndividualApp implements ContactoIndividualService {
 
 	@Override
 	public List<ContactoIndividual> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.findAll();
 	}
 
 	@Override
 	public List<ContactoIndividual> findByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		List<ContactoIndividual> lc = repository.findByName(name);
+		if(lc.isEmpty())
+			throw new UserException("No existe un contacto con ese nombre.", UserErrorType.USERNOTFOUND);
+		return lc;
 	}
 
 	@Override
 	public void add(ContactoIndividual c) {
-		// TODO Auto-generated method stub
-		
+		repository.add(c);
 	}
 
 	@Override
 	public void delete(String ID) {
-		// TODO Auto-generated method stub
-		
+		repository.delete(ID);
 	}
 	
 	

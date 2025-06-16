@@ -10,45 +10,53 @@ import javax.swing.border.TitledBorder;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.GridBagConstraints;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.time.LocalDate;
+import java.time.ZoneId;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.JTextArea;
 import com.toedter.calendar.JDateChooser;
+
+import umu.tds.AppChat.controller.SignupController;
+import umu.tds.exceptions.UserException;
+
 import javax.swing.SwingConstants;
+import javax.swing.JPasswordField;
+import javax.swing.border.CompoundBorder;
+import java.awt.Component;
+import javax.swing.ImageIcon;
 
 public class SignupView {
 
 	private JFrame frmAppchatSignup;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField textField_telefono;
+	private JTextField textField_nombre;
+	
+	private SignupController controller;
+	private JTextField textField_email;
+	private JPasswordField passwordField;
+	private JPasswordField passwordField_confirmar;
+	private JDateChooser date_fechan;
+	
+	private File imagenseleccionada;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					SignupView window = new SignupView();
-					window.frmAppchatSignup.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.
 	 */
-	public SignupView() {
+	public SignupView(SignupController controller) {
+		this.controller = controller;
 		initialize();
 	}
 	
@@ -73,49 +81,49 @@ public class SignupView {
 		frmAppchatSignup.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel_2 = new JPanel();
-		panel.add(panel_2, BorderLayout.NORTH);
-		GridBagLayout gbl_panel_2 = new GridBagLayout();
-		gbl_panel_2.columnWidths = new int[]{0, 0, 0};
-		gbl_panel_2.rowHeights = new int[]{0, 0, 0, 0, 0};
-		gbl_panel_2.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_panel_2.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		panel_2.setLayout(gbl_panel_2);
+		JPanel panel_tlfnombre = new JPanel();
+		panel.add(panel_tlfnombre, BorderLayout.NORTH);
+		GridBagLayout gbl_panel_tlfnombre = new GridBagLayout();
+		gbl_panel_tlfnombre.columnWidths = new int[]{0, 0, 0};
+		gbl_panel_tlfnombre.rowHeights = new int[]{0, 0, 0, 0, 0};
+		gbl_panel_tlfnombre.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
+		gbl_panel_tlfnombre.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		panel_tlfnombre.setLayout(gbl_panel_tlfnombre);
 		
-		JLabel lblNewLabel = new JLabel("Teléfono");
-		lblNewLabel.setFont(new Font("Roboto Condensed", Font.PLAIN, 15));
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
-		gbc_lblNewLabel.insets = new Insets(5, 5, 5, 5);
-		gbc_lblNewLabel.gridx = 0;
-		gbc_lblNewLabel.gridy = 0;
-		panel_2.add(lblNewLabel, gbc_lblNewLabel);
+		JLabel lbl_telefono = new JLabel("Teléfono");
+		lbl_telefono.setFont(new Font("Roboto Condensed", Font.PLAIN, 15));
+		GridBagConstraints gbc_lbl_telefono = new GridBagConstraints();
+		gbc_lbl_telefono.anchor = GridBagConstraints.WEST;
+		gbc_lbl_telefono.insets = new Insets(5, 5, 5, 5);
+		gbc_lbl_telefono.gridx = 0;
+		gbc_lbl_telefono.gridy = 0;
+		panel_tlfnombre.add(lbl_telefono, gbc_lbl_telefono);
 		
-		textField = new JTextField();
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.insets = new Insets(5, 5, 5, 5);
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.gridx = 1;
-		gbc_textField.gridy = 0;
-		panel_2.add(textField, gbc_textField);
-		textField.setColumns(10);
+		textField_telefono = new JTextField();
+		GridBagConstraints gbc_textField_telefono = new GridBagConstraints();
+		gbc_textField_telefono.insets = new Insets(5, 5, 5, 5);
+		gbc_textField_telefono.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_telefono.gridx = 1;
+		gbc_textField_telefono.gridy = 0;
+		panel_tlfnombre.add(textField_telefono, gbc_textField_telefono);
+		textField_telefono.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("Nombre Completo");
-		lblNewLabel_1.setFont(new Font("Roboto Condensed", Font.PLAIN, 15));
-		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-		gbc_lblNewLabel_1.insets = new Insets(5, 5, 5, 5);
-		gbc_lblNewLabel_1.gridx = 0;
-		gbc_lblNewLabel_1.gridy = 1;
-		panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
+		JLabel lbl_nombre = new JLabel("Nombre Completo");
+		lbl_nombre.setFont(new Font("Roboto Condensed", Font.PLAIN, 15));
+		GridBagConstraints gbc_lbl_nombre = new GridBagConstraints();
+		gbc_lbl_nombre.insets = new Insets(5, 5, 5, 5);
+		gbc_lbl_nombre.gridx = 0;
+		gbc_lbl_nombre.gridy = 1;
+		panel_tlfnombre.add(lbl_nombre, gbc_lbl_nombre);
 		
-		textField_1 = new JTextField();
-		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-		gbc_textField_1.insets = new Insets(5, 5, 5, 5);
-		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_1.gridx = 1;
-		gbc_textField_1.gridy = 1;
-		panel_2.add(textField_1, gbc_textField_1);
-		textField_1.setColumns(10);
+		textField_nombre = new JTextField();
+		GridBagConstraints gbc_textField_nombre = new GridBagConstraints();
+		gbc_textField_nombre.insets = new Insets(5, 5, 5, 5);
+		gbc_textField_nombre.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_nombre.gridx = 1;
+		gbc_textField_nombre.gridy = 1;
+		panel_tlfnombre.add(textField_nombre, gbc_textField_nombre);
+		textField_nombre.setColumns(10);
 		
 		JPanel panel_3 = new JPanel();
 		panel.add(panel_3, BorderLayout.CENTER);
@@ -126,92 +134,162 @@ public class SignupView {
 		panel_3.add(panel_4);
 		GridBagLayout gbl_panel_4 = new GridBagLayout();
 		gbl_panel_4.columnWidths = new int[]{0, 0, 0};
-		gbl_panel_4.rowHeights = new int[]{0, 0, 0, 0, 0};
+		gbl_panel_4.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
 		gbl_panel_4.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_panel_4.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_panel_4.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		panel_4.setLayout(gbl_panel_4);
 		
-		JLabel lblNewLabel_2 = new JLabel("Contraseña");
-		lblNewLabel_2.setFont(new Font("Roboto Condensed", Font.PLAIN, 10));
-		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
-		gbc_lblNewLabel_2.anchor = GridBagConstraints.EAST;
-		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_2.gridx = 0;
-		gbc_lblNewLabel_2.gridy = 0;
-		panel_4.add(lblNewLabel_2, gbc_lblNewLabel_2);
+		JLabel lbl_password = new JLabel("Contraseña");
+		lbl_password.setFont(new Font("Roboto Condensed", Font.PLAIN, 10));
+		GridBagConstraints gbc_lbl_password = new GridBagConstraints();
+		gbc_lbl_password.anchor = GridBagConstraints.EAST;
+		gbc_lbl_password.insets = new Insets(0, 0, 5, 5);
+		gbc_lbl_password.gridx = 0;
+		gbc_lbl_password.gridy = 0;
+		panel_4.add(lbl_password, gbc_lbl_password);
 		
-		textField_2 = new JTextField();
-		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
-		gbc_textField_2.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_2.gridx = 1;
-		gbc_textField_2.gridy = 0;
-		panel_4.add(textField_2, gbc_textField_2);
-		textField_2.setColumns(10);
+		passwordField = new JPasswordField();
+		GridBagConstraints gbc_passwordField = new GridBagConstraints();
+		gbc_passwordField.insets = new Insets(0, 0, 5, 0);
+		gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_passwordField.gridx = 1;
+		gbc_passwordField.gridy = 0;
+		panel_4.add(passwordField, gbc_passwordField);
 		
-		JLabel lblNewLabel_3 = new JLabel("Confirmar Contraseña");
-		lblNewLabel_3.setFont(new Font("Roboto Condensed", Font.PLAIN, 10));
-		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
-		gbc_lblNewLabel_3.anchor = GridBagConstraints.EAST;
-		gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_3.gridx = 0;
-		gbc_lblNewLabel_3.gridy = 1;
-		panel_4.add(lblNewLabel_3, gbc_lblNewLabel_3);
+		JLabel lbl_confirmar = new JLabel("Confirmar Contraseña");
+		lbl_confirmar.setFont(new Font("Roboto Condensed", Font.PLAIN, 10));
+		GridBagConstraints gbc_lbl_confirmar = new GridBagConstraints();
+		gbc_lbl_confirmar.anchor = GridBagConstraints.EAST;
+		gbc_lbl_confirmar.insets = new Insets(0, 0, 5, 5);
+		gbc_lbl_confirmar.gridx = 0;
+		gbc_lbl_confirmar.gridy = 1;
+		panel_4.add(lbl_confirmar, gbc_lbl_confirmar);
 		
-		textField_3 = new JTextField();
-		GridBagConstraints gbc_textField_3 = new GridBagConstraints();
-		gbc_textField_3.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_3.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_3.gridx = 1;
-		gbc_textField_3.gridy = 1;
-		panel_4.add(textField_3, gbc_textField_3);
-		textField_3.setColumns(10);
+		passwordField_confirmar = new JPasswordField();
+		GridBagConstraints gbc_passwordField_confirmar = new GridBagConstraints();
+		gbc_passwordField_confirmar.insets = new Insets(0, 0, 5, 0);
+		gbc_passwordField_confirmar.fill = GridBagConstraints.HORIZONTAL;
+		gbc_passwordField_confirmar.gridx = 1;
+		gbc_passwordField_confirmar.gridy = 1;
+		panel_4.add(passwordField_confirmar, gbc_passwordField_confirmar);
 		
-		JLabel lblNewLabel_4 = new JLabel("Fecha de Nacimiento");
-		lblNewLabel_4.setFont(new Font("Roboto Condensed", Font.PLAIN, 10));
-		GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
-		gbc_lblNewLabel_4.anchor = GridBagConstraints.EAST;
-		gbc_lblNewLabel_4.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_4.gridx = 0;
-		gbc_lblNewLabel_4.gridy = 2;
-		panel_4.add(lblNewLabel_4, gbc_lblNewLabel_4);
+		JLabel lbl_fechan = new JLabel("Fecha de Nacimiento");
+		lbl_fechan.setFont(new Font("Roboto Condensed", Font.PLAIN, 10));
+		GridBagConstraints gbc_lbl_fechan = new GridBagConstraints();
+		gbc_lbl_fechan.anchor = GridBagConstraints.EAST;
+		gbc_lbl_fechan.insets = new Insets(0, 0, 5, 5);
+		gbc_lbl_fechan.gridx = 0;
+		gbc_lbl_fechan.gridy = 2;
+		panel_4.add(lbl_fechan, gbc_lbl_fechan);
 		
-		JDateChooser dateChooser = new JDateChooser();
-		GridBagConstraints gbc_dateChooser = new GridBagConstraints();
-		gbc_dateChooser.insets = new Insets(0, 0, 5, 0);
-		gbc_dateChooser.fill = GridBagConstraints.BOTH;
-		gbc_dateChooser.gridx = 1;
-		gbc_dateChooser.gridy = 2;
-		panel_4.add(dateChooser, gbc_dateChooser);
+		date_fechan = new JDateChooser();
+		GridBagConstraints gbc_date_fechan = new GridBagConstraints();
+		gbc_date_fechan.insets = new Insets(0, 0, 5, 0);
+		gbc_date_fechan.fill = GridBagConstraints.BOTH;
+		gbc_date_fechan.gridx = 1;
+		gbc_date_fechan.gridy = 2;
+		panel_4.add(date_fechan, gbc_date_fechan);
 		
-		JLabel lblNewLabel_5 = new JLabel("Saludo");
-		lblNewLabel_5.setVerticalAlignment(SwingConstants.TOP);
-		lblNewLabel_5.setFont(new Font("Roboto Condensed", Font.PLAIN, 20));
-		GridBagConstraints gbc_lblNewLabel_5 = new GridBagConstraints();
-		gbc_lblNewLabel_5.insets = new Insets(0, 0, 0, 5);
-		gbc_lblNewLabel_5.gridx = 0;
-		gbc_lblNewLabel_5.gridy = 3;
-		panel_4.add(lblNewLabel_5, gbc_lblNewLabel_5);
+		JLabel lbl_email = new JLabel("Email");
+		lbl_email.setFont(new Font("Roboto Condensed", Font.PLAIN, 10));
+		GridBagConstraints gbc_lbl_email = new GridBagConstraints();
+		gbc_lbl_email.anchor = GridBagConstraints.EAST;
+		gbc_lbl_email.insets = new Insets(0, 0, 5, 5);
+		gbc_lbl_email.gridx = 0;
+		gbc_lbl_email.gridy = 3;
+		panel_4.add(lbl_email, gbc_lbl_email);
 		
-		JTextArea textArea = new JTextArea();
-		GridBagConstraints gbc_textArea = new GridBagConstraints();
-		gbc_textArea.fill = GridBagConstraints.BOTH;
-		gbc_textArea.gridx = 1;
-		gbc_textArea.gridy = 3;
-		panel_4.add(textArea, gbc_textArea);
+		textField_email = new JTextField();
+		GridBagConstraints gbc_textField_email = new GridBagConstraints();
+		gbc_textField_email.insets = new Insets(0, 0, 5, 0);
+		gbc_textField_email.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_email.gridx = 1;
+		gbc_textField_email.gridy = 3;
+		panel_4.add(textField_email, gbc_textField_email);
+		textField_email.setColumns(10);
+		
+		JLabel lbl_saludo = new JLabel("Saludo");
+		lbl_saludo.setVerticalAlignment(SwingConstants.TOP);
+		lbl_saludo.setFont(new Font("Roboto Condensed", Font.PLAIN, 20));
+		GridBagConstraints gbc_lbl_saludo = new GridBagConstraints();
+		gbc_lbl_saludo.insets = new Insets(0, 0, 0, 5);
+		gbc_lbl_saludo.gridx = 0;
+		gbc_lbl_saludo.gridy = 4;
+		panel_4.add(lbl_saludo, gbc_lbl_saludo);
+		
+		JTextArea textArea_saludo = new JTextArea();
+		GridBagConstraints gbc_textArea_saludo = new GridBagConstraints();
+		gbc_textArea_saludo.fill = GridBagConstraints.BOTH;
+		gbc_textArea_saludo.gridx = 1;
+		gbc_textArea_saludo.gridy = 4;
+		panel_4.add(textArea_saludo, gbc_textArea_saludo);
 		
 		JPanel panel_5 = new JPanel();
+		panel_5.setBorder(new CompoundBorder(new EmptyBorder(8, 8, 8, 8), new TitledBorder(new LineBorder(new Color(0, 0, 0), 2, true), "Foto de perfil", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0))));
 		panel_3.add(panel_5);
-		panel_5.setLayout(new BorderLayout(0, 0));
+		panel_5.setLayout(new BoxLayout(panel_5, BoxLayout.Y_AXIS));
+		
+		
+		JLabel lblPFP = new JLabel("");
+		lblPFP.setAlignmentX(Component.CENTER_ALIGNMENT);
+		panel_5.add(lblPFP);
+		ImageIcon pfp = new ImageIcon(getClass().getResource("/images/usuario.png"));
+		lblPFP.setIcon(new ImageIcon(pfp.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH)));
+		
+		JButton btnNewButton = new JButton("Seleccionar");
+		btnNewButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+		
+		panel_5.add(btnNewButton);
 		
 		JPanel panel_1 = new JPanel();
 		frmAppchatSignup.getContentPane().add(panel_1, BorderLayout.SOUTH);
 		
-		JButton btnNewButton = new JButton("Aceptar");
-		panel_1.add(btnNewButton);
+		JButton btn_aceptar = new JButton("Aceptar");
+		panel_1.add(btn_aceptar);
 		
-		JButton btnNewButton_1 = new JButton("Cancelar");
-		panel_1.add(btnNewButton_1);
+		JButton btn_cancelar = new JButton("Cancelar");
+		panel_1.add(btn_cancelar);
+		
+		addManejadorCancelar(btn_cancelar);
+		addManejadorAceptar(btn_aceptar);
+	}
+	
+	private void addManejadorAceptar(JButton btn_aceptar) {
+		btn_aceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO Registro Foto
+				try {
+					controller.register(textField_telefono.getText(), textField_nombre.getText(),
+							textField_email.getText(), new String(passwordField.getPassword()), 
+							new String(passwordField_confirmar.getPassword()),
+							date_fechan.getDate().toInstant()
+						      .atZone(ZoneId.systemDefault())
+						      .toLocalDate());
+					controller.mostrarLogin();
+					frmAppchatSignup.dispose();
+				}
+				catch (UserException ex) {
+					JOptionPane.showMessageDialog(btn_aceptar, ex.getMessage());
+				}
+			}
+		});
+	}
+	
+	private void addManejadorCancelar(JButton btn_cancelar) {
+		btn_cancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.mostrarLogin();
+				frmAppchatSignup.dispose();
+			}
+		});
+	}
+	
+	private void addManejadorFoto(JButton btn_foto) {
+		btn_foto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 	}
 
 }

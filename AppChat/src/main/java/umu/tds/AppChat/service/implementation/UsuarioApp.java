@@ -59,8 +59,10 @@ public class UsuarioApp implements UsuarioService {
 
 	@Override
 	public List<Usuario> findByName(String name) {
-		// Lanzar excepcion?  UserException("Usuario no encontrado.", UserErrorType.USERNOTFOUND)
-		return repository.findByName(name);
+		List<Usuario> lu = repository.findByName(name);
+		if(lu.isEmpty())
+			throw new UserException("Usuario no encontrado.", UserErrorType.USERNOTFOUND);
+		return lu;
 	}
 
 	@Override

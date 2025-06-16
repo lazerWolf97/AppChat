@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +19,7 @@ import javax.swing.JPasswordField;
 import javax.swing.border.TitledBorder;
 
 import umu.tds.AppChat.controller.LoginController;
+import umu.tds.exceptions.UserException;
 
 import javax.swing.border.LineBorder;
 import java.awt.Color;
@@ -146,8 +149,7 @@ public class LoginView {
 	private void addManejadorSignup(JButton btn_signup) {
 		btn_signup.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SignupView frmAppchatSignup = new SignupView();
-				frmAppchatSignup.showWindow();
+				controller.mostrarSignup();
 				frmAppchatLogin.dispose();
 			}
 		});
@@ -156,11 +158,14 @@ public class LoginView {
 	private void addManejadorAceptar(JButton btn_aceptar) {
 		btn_aceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Comprobar Login
-				boolean success = 
-						controller.checkLogin(textField_tlf.getText(), new String(passwordField.getPassword()));
-				if(!success) {
-					
+				// TODO Completar login correcto
+				try {
+					controller.login(textField_tlf.getText(), new String(passwordField.getPassword()));
+					controller.mostrarVentanaPrincipal();
+					frmAppchatLogin.dispose();
+				}
+				catch (UserException ex) {
+					JOptionPane.showMessageDialog(btn_aceptar, ex.getMessage());
 				}
 			}
 		});

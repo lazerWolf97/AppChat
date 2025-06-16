@@ -7,7 +7,10 @@ public class UserException extends RuntimeException {
 		LOGINID,
 		LOGINPASSWORD,
 		SIGNUPALREADYEXISTS,
-		USERNOTFOUND
+		USERNOTFOUND,
+		PASSWORDNOTMATCH,
+		USERCHARACTERS,
+		PASSWORDCHARACTERS
 	}
 	
 	private UserErrorType type;
