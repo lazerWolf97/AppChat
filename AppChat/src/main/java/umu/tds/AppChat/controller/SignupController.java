@@ -14,9 +14,11 @@ import umu.tds.exceptions.UserException.UserErrorType;
 public class SignupController {
 	
 	private final UsuarioService uService;
+	private final AppController controller;
 	
-	public SignupController(UsuarioService uService) {
+	public SignupController(UsuarioService uService, AppController controller) {
 		this.uService = uService;
+		this.controller = controller;
 	}
 	
 	public void initialize() {
@@ -24,7 +26,7 @@ public class SignupController {
 		view.showWindow();
 	}
 	
-	public void register(String numTLF, String nombre, String email, String password, String confirm, LocalDate fechan)
+	public void register(String numTLF, String nombre, String email, String password, String confirm, LocalDate fechan, String saludo)
 	throws UserException {
 		if (password.length() < 8) {
 			throw new UserException("Por motivos de seguridad, la contraseña debe de tener al menos 8 caracteres.",
@@ -38,13 +40,13 @@ public class SignupController {
 		}
 		else {
 			Usuario u = new Usuario(numTLF, nombre, email, password, fechan.toString());
+			u.setSaludo(saludo);
 			uService.registrar(u);
 		}
 	}
 	
 	public void mostrarLogin() {
-		LoginController lc = new LoginController(uService);
-		lc.initialize();
+		controller.mostrarLogin();
 	}
 
 }

@@ -23,8 +23,14 @@ public class MensajeApp implements MensajeService {
 	}
 
 	@Override
-	public List<Mensaje> findAllByUsername(String userID) {
+	public List<Mensaje> findAllByUser(String userID) {
 		return repository.findByUser(userID);
+	}
+	
+	@Override
+	public List<Mensaje> findByUserAndText(String userID, String text) {
+		return repository.findByUserAndText(userID, text);
+		
 	}
 
 	@Override

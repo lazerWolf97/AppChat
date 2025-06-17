@@ -23,6 +23,8 @@ public class Usuario {
 	private String password;
 	@Column(name="fnacimiento")
 	private LocalDate fnacimiento;
+	@Column(name="saludo")
+	private String saludo;
 	
 	@OneToMany
 	@JoinColumn(name="contactos")
@@ -80,6 +82,10 @@ public class Usuario {
 	public LocalDate getFnacimiento() {
 		return fnacimiento;
 	}
+	
+	public String getSaludo() {
+		return saludo;
+	}
 
 	public void setNumTLF(String numTLF) {
 		this.numTLF = numTLF;
@@ -99,6 +105,10 @@ public class Usuario {
 
 	public void setFnacimiento(String fNacimiento) {
 		this.fnacimiento = LocalDate.parse(fNacimiento);
+	}
+	
+	public void setSaludo(String saludo) {
+		this.saludo = saludo;
 	}
 	
 	public Optional<ContactoIndividual> getContactoIndividual(Usuario u) {

@@ -17,22 +17,23 @@ import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.border.TitledBorder;
 
-import umu.tds.AppChat.controller.MainController;
+import umu.tds.AppChat.controller.ChatController;
 
 import javax.swing.border.EtchedBorder;
 import javax.swing.JScrollPane;
 import javax.swing.JScrollBar;
+import javax.swing.ScrollPaneConstants;
 
 public class MainView {
 
 	private JFrame frmAppchat;
 	
-	private MainController controller;
+	private ChatController controller;
 
 	/**
 	 * Create the application.
 	 */
-	public MainView(MainController controller) {
+	public MainView(ChatController controller) {
 		this.controller = controller;
 		initialize();
 	}
@@ -61,29 +62,32 @@ public class MainView {
 		JComboBox comboBox = new JComboBox();
 		panel.add(comboBox);
 		
-		JButton btnNewButton = new JButton("New button");
+		JButton btnNewButton = new JButton("Nuevo Chat");
 		panel.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Nuevo Grupo");
+		panel.add(btnNewButton_1);
 		
 		Component horizontalGlue = Box.createHorizontalGlue();
 		panel.add(horizontalGlue);
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		panel.add(btnNewButton_1);
-		
-		JButton btnNewButton_2 = new JButton("New button");
+		JButton btnNewButton_2 = new JButton("Buscar mensajes");
 		panel.add(btnNewButton_2);
 		
 		Component horizontalGlue_1 = Box.createHorizontalGlue();
 		panel.add(horizontalGlue_1);
 		
-		JButton btnNewButton_3 = new JButton("New button");
+		JButton btnNewButton_3 = new JButton("Premium");
 		panel.add(btnNewButton_3);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(20);
 		panel.add(horizontalStrut);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		panel.add(lblNewLabel);
+		JLabel lbl_user = new JLabel("User");
+		panel.add(lbl_user);
+		
+		JButton btnNewButton_4 = new JButton("Perfil");
+		panel.add(btnNewButton_4);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new CompoundBorder(new EmptyBorder(8, 8, 8, 8), new TitledBorder(new LineBorder(new Color(0, 0, 0), 2, true), "Chats", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0))));
@@ -101,17 +105,21 @@ public class MainView {
 		frmAppchat.getContentPane().add(panel_2, BorderLayout.CENTER);
 		panel_2.setLayout(new BorderLayout(0, 0));
 		
-		JScrollBar scrollBar = new JScrollBar();
-		panel_2.add(scrollBar, BorderLayout.EAST);
-		
 		JPanel panel_3 = new JPanel();
 		panel_2.add(panel_3, BorderLayout.SOUTH);
 		
 		JPanel panel_4 = new JPanel();
 		panel_2.add(panel_4, BorderLayout.NORTH);
 		
-		JPanel panel_5 = new JPanel();
-		panel_2.add(panel_5, BorderLayout.CENTER);
+		JPanel panel_chat = new JPanel();
+		panel_chat.setBackground(new Color(255, 255, 255));
+		panel_2.add(panel_chat, BorderLayout.CENTER);
+		panel_chat.setLayout(new BorderLayout(0, 0));
+		
+		JScrollPane scroll_chat = new JScrollPane();
+		scroll_chat.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scroll_chat.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		panel_chat.add(scroll_chat);
 	}
 
 }

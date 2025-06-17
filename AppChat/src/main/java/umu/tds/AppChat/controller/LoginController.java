@@ -14,9 +14,11 @@ import umu.tds.exceptions.UserException;
 public class LoginController {
 
 	private final UsuarioService uService;
-	
-	public LoginController(UsuarioService uService) {
+	private final AppController controller;
+
+	public LoginController(UsuarioService uService, AppController controller) {
 		this.uService = uService;
+		this.controller = controller;
 	}
 	
 	public void initialize() {
@@ -34,13 +36,12 @@ public class LoginController {
 	}
 	
 	public void mostrarSignup() {
-		SignupController sc = new SignupController(uService);
-		sc.initialize();
+		controller.mostrarSignup();
 	}
 	
 	public void mostrarVentanaPrincipal() {
-		MainController mc = new MainController(uService);
-		mc.initialize();
+		controller.mostrarVentanaPrincipal();
 	}
+	
 	
 }

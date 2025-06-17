@@ -37,7 +37,7 @@ public class GrupoRepository implements GrupoDAO {
 
 	@Override
 	public void delete(String ID) {
-		em.createQuery("delete from Grupo g where g.id like :id").setParameter("id", ID).executeUpdate();
+		em.createQuery("delete from Grupo g where g.id = :id").setParameter("id", ID).executeUpdate();
 	}
 
 }

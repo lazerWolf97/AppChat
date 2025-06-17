@@ -31,7 +31,7 @@ public class UsuarioRepository implements UsuarioDAO {
 
 	@Override
 	public Optional<Usuario> findByID(String ID) {
-		return em.createQuery("select u from Usuario u where u.numTLF like :id").setParameter("id", ID).getResultStream().findFirst();
+		return em.createQuery("select u from Usuario u where u.numTLF = :id").setParameter("id", ID).getResultStream().findFirst();
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class UsuarioRepository implements UsuarioDAO {
 	
 	@Override
 	public void delete(String ID) {
-		em.createQuery("delete from Usuario u where u.numTLF like :id").setParameter("id", ID).executeUpdate();
+		em.createQuery("delete from Usuario u where u.numTLF = :id").setParameter("id", ID).executeUpdate();
 	}
 	
 	

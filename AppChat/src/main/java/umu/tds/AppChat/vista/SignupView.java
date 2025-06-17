@@ -36,6 +36,7 @@ import javax.swing.JPasswordField;
 import javax.swing.border.CompoundBorder;
 import java.awt.Component;
 import javax.swing.ImageIcon;
+import javax.swing.JScrollPane;
 
 public class SignupView {
 
@@ -48,6 +49,7 @@ public class SignupView {
 	private JPasswordField passwordField;
 	private JPasswordField passwordField_confirmar;
 	private JDateChooser date_fechan;
+	private JTextArea txt_saludo;
 	
 	private File imagenseleccionada;
 
@@ -85,9 +87,9 @@ public class SignupView {
 		panel.add(panel_tlfnombre, BorderLayout.NORTH);
 		GridBagLayout gbl_panel_tlfnombre = new GridBagLayout();
 		gbl_panel_tlfnombre.columnWidths = new int[]{0, 0, 0};
-		gbl_panel_tlfnombre.rowHeights = new int[]{0, 0, 0, 0, 0};
+		gbl_panel_tlfnombre.rowHeights = new int[]{0, 0, 0};
 		gbl_panel_tlfnombre.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_panel_tlfnombre.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_tlfnombre.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
 		panel_tlfnombre.setLayout(gbl_panel_tlfnombre);
 		
 		JLabel lbl_telefono = new JLabel("Teléfono");
@@ -101,7 +103,7 @@ public class SignupView {
 		
 		textField_telefono = new JTextField();
 		GridBagConstraints gbc_textField_telefono = new GridBagConstraints();
-		gbc_textField_telefono.insets = new Insets(5, 5, 5, 5);
+		gbc_textField_telefono.insets = new Insets(5, 5, 5, 0);
 		gbc_textField_telefono.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_telefono.gridx = 1;
 		gbc_textField_telefono.gridy = 0;
@@ -111,14 +113,14 @@ public class SignupView {
 		JLabel lbl_nombre = new JLabel("Nombre Completo");
 		lbl_nombre.setFont(new Font("Roboto Condensed", Font.PLAIN, 15));
 		GridBagConstraints gbc_lbl_nombre = new GridBagConstraints();
-		gbc_lbl_nombre.insets = new Insets(5, 5, 5, 5);
+		gbc_lbl_nombre.insets = new Insets(5, 5, 0, 5);
 		gbc_lbl_nombre.gridx = 0;
 		gbc_lbl_nombre.gridy = 1;
 		panel_tlfnombre.add(lbl_nombre, gbc_lbl_nombre);
 		
 		textField_nombre = new JTextField();
 		GridBagConstraints gbc_textField_nombre = new GridBagConstraints();
-		gbc_textField_nombre.insets = new Insets(5, 5, 5, 5);
+		gbc_textField_nombre.insets = new Insets(5, 5, 0, 0);
 		gbc_textField_nombre.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_nombre.gridx = 1;
 		gbc_textField_nombre.gridy = 1;
@@ -135,7 +137,7 @@ public class SignupView {
 		GridBagLayout gbl_panel_4 = new GridBagLayout();
 		gbl_panel_4.columnWidths = new int[]{0, 0, 0};
 		gbl_panel_4.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
-		gbl_panel_4.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
+		gbl_panel_4.columnWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
 		gbl_panel_4.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		panel_4.setLayout(gbl_panel_4);
 		
@@ -217,12 +219,17 @@ public class SignupView {
 		gbc_lbl_saludo.gridy = 4;
 		panel_4.add(lbl_saludo, gbc_lbl_saludo);
 		
-		JTextArea textArea_saludo = new JTextArea();
-		GridBagConstraints gbc_textArea_saludo = new GridBagConstraints();
-		gbc_textArea_saludo.fill = GridBagConstraints.BOTH;
-		gbc_textArea_saludo.gridx = 1;
-		gbc_textArea_saludo.gridy = 4;
-		panel_4.add(textArea_saludo, gbc_textArea_saludo);
+		JScrollPane scrollPane = new JScrollPane();
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridx = 1;
+		gbc_scrollPane.gridy = 4;
+		panel_4.add(scrollPane, gbc_scrollPane);
+		
+		txt_saludo = new JTextArea();
+		txt_saludo.setFont(new Font("Roboto Condensed", Font.PLAIN, 13));
+		txt_saludo.setText("Greetings! :)");
+		scrollPane.setViewportView(txt_saludo);
 		
 		JPanel panel_5 = new JPanel();
 		panel_5.setBorder(new CompoundBorder(new EmptyBorder(8, 8, 8, 8), new TitledBorder(new LineBorder(new Color(0, 0, 0), 2, true), "Foto de perfil", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0))));
@@ -264,7 +271,8 @@ public class SignupView {
 							new String(passwordField_confirmar.getPassword()),
 							date_fechan.getDate().toInstant()
 						      .atZone(ZoneId.systemDefault())
-						      .toLocalDate());
+						      .toLocalDate(),
+						     new String(txt_saludo.getText()));
 					controller.mostrarLogin();
 					frmAppchatSignup.dispose();
 				}

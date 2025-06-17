@@ -13,6 +13,7 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.GridLayout;
 import javax.swing.JList;
+import javax.swing.JScrollPane;
 
 public class GrupoView {
 
@@ -70,36 +71,42 @@ public class GrupoView {
 		panel_1.add(panel_3);
 		panel_3.setLayout(new BorderLayout(0, 0));
 		
-		JList list = new JList();
-		panel_3.add(list);
+		JScrollPane scrollPane_1 = new JScrollPane();
+		panel_3.add(scrollPane_1, BorderLayout.CENTER);
+		
+		JList list_contactos = new JList();
+		scrollPane_1.setViewportView(list_contactos);
 		
 		JPanel panel_4 = new JPanel();
 		panel_1.add(panel_4);
 		panel_4.setLayout(new BoxLayout(panel_4, BoxLayout.Y_AXIS));
 		
-		JButton btnNewButton_2 = new JButton(">>");
-		panel_4.add(btnNewButton_2);
+		JButton btn_add = new JButton(">>");
+		panel_4.add(btn_add);
 		
-		JButton btnNewButton_3 = new JButton("<<");
-		panel_4.add(btnNewButton_3);
+		JButton btn_remove = new JButton("<<");
+		panel_4.add(btn_remove);
 		
 		JPanel panel_5 = new JPanel();
 		panel_5.setBorder(new TitledBorder(new EmptyBorder(8, 8, 8, 8), "Contactos inclu\u00EDdos en el grupo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_1.add(panel_5);
 		panel_5.setLayout(new BorderLayout(0, 0));
 		
-		JList list_1 = new JList();
-		panel_5.add(list_1);
+		JScrollPane scrollPane = new JScrollPane();
+		panel_5.add(scrollPane, BorderLayout.CENTER);
+		
+		JList list_grupo = new JList();
+		scrollPane.setViewportView(list_grupo);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new EmptyBorder(5, 5, 5, 5));
 		frmAppchatCrear.getContentPane().add(panel_2, BorderLayout.SOUTH);
 		
-		JButton btnNewButton = new JButton("New button");
-		panel_2.add(btnNewButton);
+		JButton btn_crear = new JButton("Crear Grupo");
+		panel_2.add(btn_crear);
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		panel_2.add(btnNewButton_1);
+		JButton btn_cancelar = new JButton("Cancelar");
+		panel_2.add(btn_cancelar);
 	}
 
 }

@@ -37,7 +37,7 @@ public class ContactoIndividualRepository implements ContactoIndividualDAO {
 
 	@Override
 	public void delete(String ID) {
-		em.createQuery("delete from ContactoIndividual c where c.id like :id")
+		em.createQuery("delete from ContactoIndividual c where c.id = :id")
 			.setParameter("id", ID).executeUpdate();
 	}
 

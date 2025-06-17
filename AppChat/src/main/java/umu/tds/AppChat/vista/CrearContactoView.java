@@ -10,17 +10,19 @@ import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.JLabel;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 
 public class CrearContactoView {
 
 	private JFrame frmCrearContacto;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField textField_tlf;
+	private JTextField textField_nombre;
 
 	/**
 	 * Launch the application.
@@ -50,6 +52,7 @@ public class CrearContactoView {
 	 */
 	private void initialize() {
 		frmCrearContacto = new JFrame();
+		frmCrearContacto.setResizable(false);
 		frmCrearContacto.setTitle("Crear contacto");
 		frmCrearContacto.setBounds(100, 100, 450, 200);
 		frmCrearContacto.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,20 +62,22 @@ public class CrearContactoView {
 		frmCrearContacto.getContentPane().add(panel, BorderLayout.WEST);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		panel.add(lblNewLabel);
+		JLabel lblIcon = new JLabel("");
+		panel.add(lblIcon);
+		ImageIcon pfp = new ImageIcon(getClass().getResource("/images/usuario.png"));
+		lblIcon.setIcon(new ImageIcon(pfp.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
 		
 		JPanel panel_1 = new JPanel();
 		frmCrearContacto.getContentPane().add(panel_1, BorderLayout.SOUTH);
 		
-		JButton btnNewButton = new JButton("Crear Contacto");
-		panel_1.add(btnNewButton);
+		JButton btn_crear_contacto = new JButton("Crear Contacto");
+		panel_1.add(btn_crear_contacto);
 		
-		JButton btnNewButton_1 = new JButton("Cancelar");
-		panel_1.add(btnNewButton_1);
+		JButton btn_cancelar = new JButton("Cancelar");
+		panel_1.add(btn_cancelar);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new EmptyBorder(50, 10, 50, 10));
+		panel_2.setBorder(new EmptyBorder(50, 10, 50, 20));
 		frmCrearContacto.getContentPane().add(panel_2, BorderLayout.CENTER);
 		GridBagLayout gbl_panel_2 = new GridBagLayout();
 		gbl_panel_2.columnWidths = new int[]{0, 0, 0};
@@ -81,38 +86,38 @@ public class CrearContactoView {
 		gbl_panel_2.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
 		panel_2.setLayout(gbl_panel_2);
 		
-		JLabel lblNewLabel_1 = new JLabel("Teléfono");
-		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-		gbc_lblNewLabel_1.anchor = GridBagConstraints.EAST;
-		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_1.gridx = 0;
-		gbc_lblNewLabel_1.gridy = 0;
-		panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
+		JLabel lbl_telefono = new JLabel("Teléfono");
+		GridBagConstraints gbc_lbl_telefono = new GridBagConstraints();
+		gbc_lbl_telefono.anchor = GridBagConstraints.EAST;
+		gbc_lbl_telefono.insets = new Insets(0, 0, 5, 5);
+		gbc_lbl_telefono.gridx = 0;
+		gbc_lbl_telefono.gridy = 0;
+		panel_2.add(lbl_telefono, gbc_lbl_telefono);
 		
-		textField = new JTextField();
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.insets = new Insets(0, 0, 5, 0);
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.gridx = 1;
-		gbc_textField.gridy = 0;
-		panel_2.add(textField, gbc_textField);
-		textField.setColumns(10);
+		textField_tlf = new JTextField();
+		GridBagConstraints gbc_textField_tlf = new GridBagConstraints();
+		gbc_textField_tlf.insets = new Insets(0, 0, 5, 0);
+		gbc_textField_tlf.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_tlf.gridx = 1;
+		gbc_textField_tlf.gridy = 0;
+		panel_2.add(textField_tlf, gbc_textField_tlf);
+		textField_tlf.setColumns(10);
 		
-		JLabel lblNewLabel_2 = new JLabel("Nombre de Contacto");
-		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
-		gbc_lblNewLabel_2.anchor = GridBagConstraints.EAST;
-		gbc_lblNewLabel_2.insets = new Insets(0, 0, 0, 5);
-		gbc_lblNewLabel_2.gridx = 0;
-		gbc_lblNewLabel_2.gridy = 1;
-		panel_2.add(lblNewLabel_2, gbc_lblNewLabel_2);
+		JLabel lbl_nombre = new JLabel("Nombre de Contacto");
+		GridBagConstraints gbc_lbl_nombre = new GridBagConstraints();
+		gbc_lbl_nombre.anchor = GridBagConstraints.EAST;
+		gbc_lbl_nombre.insets = new Insets(0, 0, 0, 5);
+		gbc_lbl_nombre.gridx = 0;
+		gbc_lbl_nombre.gridy = 1;
+		panel_2.add(lbl_nombre, gbc_lbl_nombre);
 		
-		textField_1 = new JTextField();
-		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_1.gridx = 1;
-		gbc_textField_1.gridy = 1;
-		panel_2.add(textField_1, gbc_textField_1);
-		textField_1.setColumns(10);
+		textField_nombre = new JTextField();
+		GridBagConstraints gbc_textField_nombre = new GridBagConstraints();
+		gbc_textField_nombre.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_nombre.gridx = 1;
+		gbc_textField_nombre.gridy = 1;
+		panel_2.add(textField_nombre, gbc_textField_nombre);
+		textField_nombre.setColumns(10);
 	}
 
 }

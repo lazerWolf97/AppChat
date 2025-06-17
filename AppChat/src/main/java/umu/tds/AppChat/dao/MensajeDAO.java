@@ -11,6 +11,10 @@ public interface MensajeDAO {
 
 	List<Mensaje> findAll();
 	List<Mensaje> findByUser(String userID);
+	List<Mensaje> findByEmisor(String userID);
+	List<Mensaje> findByReceptor(String userID);
+	List<Mensaje> findByUserAndText(String userID, String text);
 	void add(Mensaje m);
 	void delete(String ID);
+	
 }
