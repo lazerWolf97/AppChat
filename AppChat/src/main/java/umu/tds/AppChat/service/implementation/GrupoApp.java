@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import umu.tds.AppChat.dao.GrupoDAO;
+import umu.tds.AppChat.dominio.Grupo;
 import umu.tds.AppChat.service.GrupoService;
-import umu.tds.dominio.Grupo;
 import umu.tds.exceptions.UserException;
 import umu.tds.exceptions.UserException.UserErrorType;
 

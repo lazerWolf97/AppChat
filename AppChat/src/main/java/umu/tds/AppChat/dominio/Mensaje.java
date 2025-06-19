@@ -1,4 +1,4 @@
-package umu.tds.dominio;
+package umu.tds.AppChat.dominio;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

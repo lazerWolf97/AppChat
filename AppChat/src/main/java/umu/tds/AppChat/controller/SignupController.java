@@ -4,9 +4,9 @@ import java.time.LocalDate;
 
 import org.springframework.stereotype.Component;
 
+import umu.tds.AppChat.dominio.Usuario;
 import umu.tds.AppChat.service.UsuarioService;
 import umu.tds.AppChat.vista.SignupView;
-import umu.tds.dominio.Usuario;
 import umu.tds.exceptions.UserException;
 import umu.tds.exceptions.UserException.UserErrorType;
 

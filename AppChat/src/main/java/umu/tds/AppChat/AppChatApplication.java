@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import umu.tds.AppChat.controller.AppController;
 
 @SpringBootApplication
-@EntityScan(basePackages = "umu.tds.dominio")
+@EntityScan(basePackages = "umu.tds.AppChat.dominio")
 @ComponentScan(basePackages = "umu.tds.AppChat")
 public class AppChatApplication {
 

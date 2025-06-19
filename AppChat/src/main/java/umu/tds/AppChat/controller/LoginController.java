@@ -4,10 +4,10 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
+import umu.tds.AppChat.dominio.Usuario;
 import umu.tds.AppChat.service.UsuarioService;
 import umu.tds.AppChat.session.CurrentSession;
 import umu.tds.AppChat.vista.LoginView;
-import umu.tds.dominio.Usuario;
 import umu.tds.exceptions.UserException;
 
 @Component

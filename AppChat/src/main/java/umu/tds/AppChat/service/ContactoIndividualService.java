@@ -2,7 +2,7 @@ package umu.tds.AppChat.service;
 
 import java.util.List;
 
-import umu.tds.dominio.ContactoIndividual;
+import umu.tds.AppChat.dominio.ContactoIndividual;
 
 public interface ContactoIndividualService {
 

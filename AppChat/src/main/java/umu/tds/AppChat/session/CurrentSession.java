@@ -1,6 +1,6 @@
 package umu.tds.AppChat.session;
 
-import umu.tds.dominio.Usuario;
+import umu.tds.AppChat.dominio.Usuario;
 
 public class CurrentSession {
 	

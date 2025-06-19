@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
-import umu.tds.dominio.Usuario;
+import umu.tds.AppChat.dominio.Usuario;
 
 @Repository
 public interface UsuarioDAO {

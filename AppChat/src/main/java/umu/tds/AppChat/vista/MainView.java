@@ -25,10 +25,12 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.JScrollPane;
 import javax.swing.JScrollBar;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.JList;
 
 public class MainView {
 
 	private JFrame frmAppchat;
+	private JPanel panel_chat;
 	
 	private ChatController controller;
 
@@ -90,34 +92,16 @@ public class MainView {
 		frmAppchat.getContentPane().add(panel_1, BorderLayout.WEST);
 		panel_1.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel_6 = new JPanel();
-		panel_1.add(panel_6);
+		JScrollPane scrollPane = new JScrollPane();
+		panel_1.add(scrollPane, BorderLayout.CENTER);
 		
-		JScrollBar scrollBar_1 = new JScrollBar();
-		panel_1.add(scrollBar_1, BorderLayout.EAST);
-		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new CompoundBorder(new EmptyBorder(8, 8, 8, 8), new LineBorder(new Color(0, 0, 0), 2, true)));
-		frmAppchat.getContentPane().add(panel_2, BorderLayout.CENTER);
-		panel_2.setLayout(new BorderLayout(0, 0));
-		
-		JPanel panel_3 = new JPanel();
-		panel_2.add(panel_3, BorderLayout.SOUTH);
-		
-		JPanel panel_4 = new JPanel();
-		panel_2.add(panel_4, BorderLayout.NORTH);
-		
-		JPanel panel_chat = new JPanel();
-		panel_chat.setBackground(new Color(255, 255, 255));
-		panel_2.add(panel_chat, BorderLayout.CENTER);
+		panel_chat = new JPanel();
+		panel_chat.setBorder(new CompoundBorder(new EmptyBorder(8, 8, 8, 8), new LineBorder(new Color(0, 0, 0), 2, true)));
+		frmAppchat.getContentPane().add(panel_chat, BorderLayout.CENTER);
 		panel_chat.setLayout(new BorderLayout(0, 0));
 		
-		JScrollPane scroll_chat = new JScrollPane();
-		scroll_chat.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scroll_chat.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		panel_chat.add(scroll_chat);
-		
 		addManejadorBuscar(btn_buscar);
+		mostrarChat("David", "12345567");
 	}
 	
 	private void addManejadorBuscar(JButton btn_buscar) {
@@ -126,6 +110,14 @@ public class MainView {
 				controller.mostrarSearch();
 			}
 		});
+	}
+	
+	public void mostrarChat(String nombreContacto, String telefono) {
+	    panel_chat.removeAll();
+	    ChatPanel chatPanel = new ChatPanel(controller, nombreContacto, telefono);
+	    panel_chat.add(chatPanel, BorderLayout.CENTER);
+	    panel_chat.revalidate();
+	    panel_chat.repaint();
 	}
 
 }

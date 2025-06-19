@@ -9,7 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import umu.tds.AppChat.dao.MensajeDAO;
-import umu.tds.dominio.Mensaje;
+import umu.tds.AppChat.dominio.Mensaje;
 
 @Repository
 @Transactional
@@ -40,6 +40,16 @@ public class MensajeRepository implements MensajeDAO {
 	public List<Mensaje> findByReceptor(String userID) {
 		return em.createQuery("select m from Mensaje m where m.receptor = :id")
 				.setParameter("id", userID).getResultList();
+	}
+	
+	@Override
+	public List<Mensaje> findChat(String firstuser, String seconduser) {
+		return em.createQuery("SELECT m FROM Mensaje m WHERE " +
+		        "(m.emisor.id = :first AND m.receptor.id = :second) OR " +
+		        "(m.emisor.id = :second AND m.receptor.id = :first)")
+		        .setParameter("first", firstuser)
+		        .setParameter("second", seconduser)
+		        .getResultList();
 	}
 	
 	@Override

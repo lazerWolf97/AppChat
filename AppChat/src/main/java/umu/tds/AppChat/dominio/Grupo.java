@@ -1,4 +1,4 @@
-package umu.tds.dominio;
+package umu.tds.AppChat.dominio;
 
 import java.util.LinkedList;
 import java.util.List;

@@ -9,7 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import umu.tds.AppChat.dao.ContactoIndividualDAO;
-import umu.tds.dominio.ContactoIndividual;
+import umu.tds.AppChat.dominio.ContactoIndividual;
 
 @SuppressWarnings("unchecked")
 @Repository

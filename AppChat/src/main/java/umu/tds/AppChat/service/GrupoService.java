@@ -2,7 +2,7 @@ package umu.tds.AppChat.service;
 
 import java.util.List;
 
-import umu.tds.dominio.Grupo;
+import umu.tds.AppChat.dominio.Grupo;
 
 public interface GrupoService {
 

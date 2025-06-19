@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import umu.tds.dominio.ContactoIndividual;
+import umu.tds.AppChat.dominio.ContactoIndividual;
 
 @Repository
 public interface ContactoIndividualDAO {

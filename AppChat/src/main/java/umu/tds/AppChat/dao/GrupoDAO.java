@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import umu.tds.dominio.Grupo;
+import umu.tds.AppChat.dominio.Grupo;
 
 @Repository
 public interface GrupoDAO {
