@@ -12,6 +12,9 @@ import javax.swing.ImageIcon;
 
 import java.awt.Component;
 import javax.swing.border.TitledBorder;
+
+import umu.tds.AppChat.controller.SearchController;
+
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.border.EmptyBorder;
@@ -20,48 +23,42 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 
 public class SearchView {
 
-	private JFrame frame;
+	private JFrame frmSearch;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					SearchView window = new SearchView();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
+	private SearchController controller;
 
 	/**
 	 * Create the application.
 	 */
-	public SearchView() {
+	public SearchView(SearchController controller) {
+		this.controller = controller;
 		initialize();
+	}
+	
+	public void showWindow() {
+		frmSearch.setLocationRelativeTo(null);
+		frmSearch.setVisible(true);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 600);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmSearch = new JFrame();
+		frmSearch.setTitle("Buscar mensajes");
+		frmSearch.setBounds(100, 100, 450, 600);
+		frmSearch.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new CompoundBorder(new EmptyBorder(8, 8, 8, 8), new LineBorder(new Color(0, 0, 0), 2, true)));
-		frame.getContentPane().add(panel, BorderLayout.CENTER);
+		frmSearch.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(new BorderLayout(0, 0));
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -69,7 +66,7 @@ public class SearchView {
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new EmptyBorder(8, 8, 8, 8));
-		frame.getContentPane().add(panel_1, BorderLayout.NORTH);
+		frmSearch.getContentPane().add(panel_1, BorderLayout.NORTH);
 		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.Y_AXIS));
 		
 		JLabel lblicon = new JLabel("");
@@ -119,7 +116,7 @@ public class SearchView {
 		
 		JPanel panel_5 = new JPanel();
 		panel_5.setBorder(new EmptyBorder(8, 8, 8, 8));
-		frame.getContentPane().add(panel_5, BorderLayout.SOUTH);
+		frmSearch.getContentPane().add(panel_5, BorderLayout.SOUTH);
 		
 		JButton btnNewButton = new JButton("Buscar");
 		panel_5.add(btnNewButton);

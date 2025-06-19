@@ -1,5 +1,7 @@
 package umu.tds.AppChat.controller;
 
+import javax.swing.JFrame;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -8,27 +10,32 @@ import umu.tds.AppChat.service.*;
 @Component
 public class AppController {
 
-    private final UsuarioService usuarioService;
-    private final MensajeService mensajeService;
+    private final UsuarioService uService;
+    private final MensajeService mService;
 
     @Autowired
-    public AppController(UsuarioService usuarioService, MensajeService mensajeService) {
-        this.usuarioService = usuarioService;
-        this.mensajeService = mensajeService;
+    public AppController(UsuarioService uService, MensajeService mService) {
+        this.uService = uService;
+        this.mService = mService;
     }
 
     public void mostrarVentanaPrincipal() {
-        ChatController chatController = new ChatController(usuarioService, mensajeService, this);
+        ChatController chatController = new ChatController(uService, mService, this);
         chatController.initialize();
     }
 
     public void mostrarLogin() {
-        LoginController loginController = new LoginController(usuarioService, this);
+        LoginController loginController = new LoginController(uService, this);
         loginController.initialize();
     }
     
     public void mostrarSignup() {
-    	SignupController signupController = new SignupController(usuarioService, this);
+    	SignupController signupController = new SignupController(uService, this);
     	signupController.initialize();
+    }
+    
+    public void mostrarSearch() {
+    	SearchController searchController = new SearchController(mService, this);
+    	searchController.initialize();
     }
 }

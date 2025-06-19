@@ -2,6 +2,8 @@ package umu.tds.AppChat.controller;
 
 import java.util.List;
 
+import javax.swing.JFrame;
+
 import org.springframework.stereotype.Component;
 
 import umu.tds.AppChat.service.MensajeService;
@@ -28,6 +30,10 @@ public class ChatController {
 		view.showWindow();
 	}
 	
+	public void mostrarSearch() {
+		controller.mostrarSearch();
+	}
+	
 	// (Emisor|Receptor)(Fecha|Hora):Mensaje
 	public String getMensajes() {
 		List<Mensaje> lm = mService.findAllByUser(CurrentSession.getUsuarioActual().getNumTLF());
@@ -46,6 +52,10 @@ public class ChatController {
 				+ m.getReceptor() + ")(" + m.getFecha()
 				+ "|" + m.getHora() + "):" + m.getTexto()));
 		return sb.toString();
+	}
+	
+	public String getCurrentUsername() {
+		return CurrentSession.getUsuarioActual().getNombre();
 	}
 	
 }

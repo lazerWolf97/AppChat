@@ -1,6 +1,8 @@
 package umu.tds.AppChat.vista;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
@@ -62,32 +64,26 @@ public class MainView {
 		JComboBox comboBox = new JComboBox();
 		panel.add(comboBox);
 		
-		JButton btnNewButton = new JButton("Nuevo Chat");
-		panel.add(btnNewButton);
+		JButton btn_nuevochat = new JButton("Nuevo Chat");
+		panel.add(btn_nuevochat);
 		
-		JButton btnNewButton_1 = new JButton("Nuevo Grupo");
-		panel.add(btnNewButton_1);
+		JButton btn_nuevogrupo = new JButton("Nuevo Grupo");
+		panel.add(btn_nuevogrupo);
 		
 		Component horizontalGlue = Box.createHorizontalGlue();
 		panel.add(horizontalGlue);
 		
-		JButton btnNewButton_2 = new JButton("Buscar mensajes");
-		panel.add(btnNewButton_2);
+		JButton btn_buscar = new JButton("Buscar mensajes");
+		panel.add(btn_buscar);
 		
 		Component horizontalGlue_1 = Box.createHorizontalGlue();
 		panel.add(horizontalGlue_1);
 		
-		JButton btnNewButton_3 = new JButton("Premium");
-		panel.add(btnNewButton_3);
+		JButton btn_premium = new JButton("Premium");
+		panel.add(btn_premium);
 		
-		Component horizontalStrut = Box.createHorizontalStrut(20);
-		panel.add(horizontalStrut);
-		
-		JLabel lbl_user = new JLabel("User");
-		panel.add(lbl_user);
-		
-		JButton btnNewButton_4 = new JButton("Perfil");
-		panel.add(btnNewButton_4);
+		JButton btn_perfil = new JButton(controller.getCurrentUsername());
+		panel.add(btn_perfil);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new CompoundBorder(new EmptyBorder(8, 8, 8, 8), new TitledBorder(new LineBorder(new Color(0, 0, 0), 2, true), "Chats", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0))));
@@ -120,6 +116,16 @@ public class MainView {
 		scroll_chat.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scroll_chat.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		panel_chat.add(scroll_chat);
+		
+		addManejadorBuscar(btn_buscar);
+	}
+	
+	private void addManejadorBuscar(JButton btn_buscar) {
+		btn_buscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.mostrarSearch();
+			}
+		});
 	}
 
 }
