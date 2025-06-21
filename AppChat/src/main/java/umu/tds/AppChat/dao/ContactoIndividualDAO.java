@@ -14,4 +14,5 @@ public interface ContactoIndividualDAO {
 	List<ContactoIndividual> findByNameAndUser(String name, String userID);
 	void add(ContactoIndividual c);
 	void delete(String ID);
+	void update(ContactoIndividual c);
 }

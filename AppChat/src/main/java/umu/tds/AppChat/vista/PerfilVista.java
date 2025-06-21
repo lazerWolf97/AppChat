@@ -7,8 +7,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.BoxLayout;
 import java.awt.Component;
 import javax.swing.border.EmptyBorder;
@@ -26,6 +28,7 @@ import com.toedter.calendar.JDateChooser;
 import umu.tds.AppChat.controller.PerfilController;
 import umu.tds.AppChat.vista.observer.PerfilEvent;
 import umu.tds.AppChat.vista.observer.PerfilListener;
+import java.awt.FlowLayout;
 
 public class PerfilVista {
 
@@ -58,7 +61,7 @@ public class PerfilVista {
 	private void initialize() {
 		frmEditarPerfil = new JFrame();
 		frmEditarPerfil.setTitle("Editar Perfil");
-		frmEditarPerfil.setBounds(100, 100, 450, 300);
+		frmEditarPerfil.setBounds(100, 100, 500, 300);
 		frmEditarPerfil.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
@@ -81,6 +84,7 @@ public class PerfilVista {
 		
 		JPanel panel_1 = new JPanel();
 		frmEditarPerfil.getContentPane().add(panel_1, BorderLayout.SOUTH);
+		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JButton btn_aceptar = new JButton("Aceptar");
 		panel_1.add(btn_aceptar);
@@ -93,9 +97,9 @@ public class PerfilVista {
 		frmEditarPerfil.getContentPane().add(panel_2, BorderLayout.CENTER);
 		GridBagLayout gbl_panel_2 = new GridBagLayout();
 		gbl_panel_2.columnWidths = new int[]{0, 0, 0};
-		gbl_panel_2.rowHeights = new int[]{0, 0, 0, 0, 0};
+		gbl_panel_2.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
 		gbl_panel_2.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_panel_2.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_panel_2.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		panel_2.setLayout(gbl_panel_2);
 		
 		JLabel lblNewLabel = new JLabel("Nombre");
@@ -148,22 +152,30 @@ public class PerfilVista {
 		gbc_dateChooser.gridy = 2;
 		panel_2.add(dateChooser, gbc_dateChooser);
 		
-		JLabel lblNewLabel_2 = new JLabel("Saludo");
-		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
-		gbc_lblNewLabel_2.insets = new Insets(0, 0, 0, 5);
-		gbc_lblNewLabel_2.gridx = 0;
-		gbc_lblNewLabel_2.gridy = 3;
-		panel_2.add(lblNewLabel_2, gbc_lblNewLabel_2);
+		JLabel lblNewLabel_3 = new JLabel("Premium");
+		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
+		gbc_lblNewLabel_3.insets = new Insets(0, 0, 0, 5);
+		gbc_lblNewLabel_3.gridx = 0;
+		gbc_lblNewLabel_3.gridy = 4;
+		panel_2.add(lblNewLabel_3, gbc_lblNewLabel_3);
 		
-		JTextArea textArea_saludo = new JTextArea();
-		GridBagConstraints gbc_textArea_saludo = new GridBagConstraints();
-		gbc_textArea_saludo.fill = GridBagConstraints.BOTH;
-		gbc_textArea_saludo.gridx = 1;
-		gbc_textArea_saludo.gridy = 3;
-		panel_2.add(textArea_saludo, gbc_textArea_saludo);
+		JPanel panel_4 = new JPanel();
+		GridBagConstraints gbc_panel_4 = new GridBagConstraints();
+		gbc_panel_4.fill = GridBagConstraints.BOTH;
+		gbc_panel_4.gridx = 1;
+		gbc_panel_4.gridy = 4;
+		panel_2.add(panel_4, gbc_panel_4);
+		
+		JLabel lblNewLabel_4 = new JLabel("Precio Ajustado");
+		panel_4.add(lblNewLabel_4);
+		
+		JButton btn_premium = new JButton(Double.toString(controller.getPrecioPremium()));
+		if(controller.comprobarPremium()) btn_premium.setEnabled(false);
+		panel_4.add(btn_premium);
 		
 		addManejadorAceptar(btn_aceptar);
 		addManejadorCancelar(btn_cancelar);
+		addManejadorPremium(btn_premium);
 	}
 	
 	private void addManejadorAceptar(JButton btn_aceptar) {
@@ -183,6 +195,16 @@ public class PerfilVista {
 		btn_cancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frmEditarPerfil.dispose();
+			}
+		});
+	}
+	
+	private void addManejadorPremium(JButton btn_premium) {
+		btn_premium.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.hacerPremium();
+				JOptionPane.showMessageDialog(btn_premium, "¡Felicidades! ¡Ahora eres Premium!");
+				btn_premium.setEnabled(false);
 			}
 		});
 	}

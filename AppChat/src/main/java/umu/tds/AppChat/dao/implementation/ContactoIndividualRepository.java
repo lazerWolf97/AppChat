@@ -48,4 +48,11 @@ public class ContactoIndividualRepository implements ContactoIndividualDAO {
 			.setParameter("id", ID).executeUpdate();
 	}
 
+	@Override
+	public void update(ContactoIndividual c) {
+		em.merge(c);
+	}
+	
+	
+
 }

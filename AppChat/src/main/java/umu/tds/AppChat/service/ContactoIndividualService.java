@@ -11,4 +11,5 @@ public interface ContactoIndividualService {
 	public List<ContactoIndividual> findByNameAndUser(String name, String userID);
 	public void add(ContactoIndividual c);
 	public void delete(String ID);
+	public void update(ContactoIndividual c);
 }

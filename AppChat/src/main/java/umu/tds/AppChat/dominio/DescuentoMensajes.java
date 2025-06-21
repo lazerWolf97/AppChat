@@ -4,8 +4,11 @@ public class DescuentoMensajes implements Descuento {
 
 	@Override
 	public double calcularTotal(Usuario u) {
-		// TODO Auto-generated method stub
-		return 0;
+		long nMensajes = u.getNMensajes();
+		
+		if(nMensajes > 5000 && nMensajes <= 10000) return 9;
+		if(nMensajes > 10000) return 8;
+		return 10;
 	}
 
 }

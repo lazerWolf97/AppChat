@@ -1,12 +1,16 @@
 package umu.tds.AppChat.dominio;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 import javax.persistence.*;
+
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters.LocalDateConverter;
 
 @Entity
 @Table (name="USUARIO")
@@ -23,8 +27,12 @@ public class Usuario {
 	private String password;
 	@Column(name="fnacimiento")
 	private LocalDate fnacimiento;
-	@Column(name="saludo")
-	private String saludo;
+	@Column(name="nmensajes")
+	private long nmensajes;
+	@Column(name="fecharegistro")
+	private LocalDate fregistro;
+	@Column(name="premium")
+	private boolean premium;
 	
 	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name="contactos")
@@ -36,27 +44,53 @@ public class Usuario {
 	@JoinColumn(name="recibidos")
 	private List<Mensaje> recibidos;
 	
-	public Usuario(String numTLF, String nombre, String email, String password, String fNacimiento) {
+	@Transient
+	private Descuento descuento;
+	
+	public Usuario(String numTLF, String nombre, String email, String password,
+			String fNacimiento) {
 		this.numTLF = numTLF;
 		this.nombre = nombre;
 		this.email = email;
 		this.password = password;
 		this.fnacimiento = LocalDate.parse(fNacimiento);
+		this.fregistro = LocalDate.now();
 		this.contactos = new LinkedList<Contacto>();
 		this.enviados = new LinkedList<Mensaje>();
 		this.recibidos = new LinkedList<Mensaje>();
+		this.nmensajes = 0;
+		this.premium = false;
+	}
+	
+	public Usuario(String numTLF, String nombre, String email, String password,
+			String fNacimiento, String fRegistro) {
+		this.numTLF = numTLF;
+		this.nombre = nombre;
+		this.email = email;
+		this.password = password;
+		this.fnacimiento = LocalDate.parse(fNacimiento);
+		this.fregistro = LocalDate.parse(fRegistro);
+		this.contactos = new LinkedList<Contacto>();
+		this.enviados = new LinkedList<Mensaje>();
+		this.recibidos = new LinkedList<Mensaje>();
+		this.nmensajes = 0;
+		this.premium = false;
 	}
 	
 	
-	public Usuario(String numTLF, String nombre, String email, String password, int dia, int mes, int año) {
+	public Usuario(String numTLF, String nombre, String email, String password, int dia, int mes, int año,
+			LocalDate fRegistro) {
 		this.numTLF = numTLF;
 		this.nombre = nombre;
 		this.email = email;
 		this.password = password;
 		this.fnacimiento = LocalDate.of(año, mes, dia);
+		this.fregistro = fRegistro;
 		this.contactos = new LinkedList<Contacto>();
 		this.enviados = new LinkedList<Mensaje>();
 		this.recibidos = new LinkedList<Mensaje>();
+		this.nmensajes = 0;
+		this.premium = false;
 	}
 	
 	public Usuario() {
@@ -78,19 +112,27 @@ public class Usuario {
 	public String getPassword() {
 		return password;
 	}
+	
+	public long getNMensajes() {
+		return nmensajes;
+	}
 
 	public LocalDate getFnacimiento() {
 		return fnacimiento;
+	}
+	
+	public LocalDate getFregistro() {
+		return fregistro;
 	}
 	
 	public List<Contacto> getContactos() {
 		return contactos;
 	}
 	
-	public String getSaludo() {
-		return saludo;
+	public boolean isPremium() {
+		return premium;
 	}
-
+	
 	public void setNumTLF(String numTLF) {
 		this.numTLF = numTLF;
 	}
@@ -115,12 +157,40 @@ public class Usuario {
 		this.fnacimiento = fNacimiento;
 	}
 	
-	public void setSaludo(String saludo) {
-		this.saludo = saludo;
-	}
-	
 	public void addContacto(Contacto c) {
 		contactos.add(c);
+	}
+	
+	public void addMensajeContador() {
+		nmensajes++;
+	}
+	
+	public void setNMensajes(long n) {
+		nmensajes = n;
+	}
+	
+	public void setFRegistro(String fRegistro) {
+		this.fregistro = LocalDate.parse(fRegistro);
+	}
+	
+	public void setFRegistro(LocalDate fRegistro) {
+		this.fregistro = fRegistro;
+	}
+	
+	public long getYearsOld() {
+		return ChronoUnit.YEARS.between(fregistro, LocalDate.now());
+	}
+	
+	public void setPremium(boolean premium) {
+		this.premium = premium;
+	}
+	
+	public void establecerDescuento(String tipo) {
+		descuento = DescuentoFactory.getDescuento(tipo);
+	}
+	
+	public double calcularDescuento() {
+		return descuento.calcularTotal(this);
 	}
 	
 	public Optional<ContactoIndividual> getContactoIndividual(Usuario u) {

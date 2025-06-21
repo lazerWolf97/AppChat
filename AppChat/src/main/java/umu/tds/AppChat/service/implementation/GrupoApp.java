@@ -40,5 +40,10 @@ public class GrupoApp implements GrupoService {
 	public void delete(String ID) {
 		repository.delete(ID);
 	}
+
+	@Override
+	public void update(Grupo g) {
+		repository.update(g);
+	}
 	
 }

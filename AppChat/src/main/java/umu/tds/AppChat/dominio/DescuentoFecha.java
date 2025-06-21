@@ -4,8 +4,9 @@ public class DescuentoFecha implements Descuento {
 
 	@Override
 	public double calcularTotal(Usuario u) {
-		// TODO Auto-generated method stub
-		return 0;
+		double precio = 10 - u.getYearsOld();
+		if(precio < 6) return 6;
+		return precio;
 	}
 
 }

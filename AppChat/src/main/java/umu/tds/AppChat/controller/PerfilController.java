@@ -46,4 +46,22 @@ public class PerfilController {
 		uService.update(CurrentSession.getUsuarioActual());
 	}
 	
+	public double getPrecioPremium() {
+		if(CurrentSession.getUsuarioActual().getYearsOld() >= 2) {
+			CurrentSession.getUsuarioActual().establecerDescuento("Fecha");
+		}
+		else {
+			CurrentSession.getUsuarioActual().establecerDescuento("Mensajes");
+		}
+		return CurrentSession.getUsuarioActual().calcularDescuento();
+	}
+	
+	public void hacerPremium() {
+		CurrentSession.getUsuarioActual().setPremium(true);
+	}
+	
+	public boolean comprobarPremium() {
+		return CurrentSession.getUsuarioActual().isPremium();
+	}
+	
 }

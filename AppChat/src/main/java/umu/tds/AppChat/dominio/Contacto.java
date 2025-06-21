@@ -29,6 +29,10 @@ public abstract class Contacto {
 		return nombre;
 	}
 	
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
 	// Para el ComboBox de la Ventana Principal
 	@Override
 	public String toString() {

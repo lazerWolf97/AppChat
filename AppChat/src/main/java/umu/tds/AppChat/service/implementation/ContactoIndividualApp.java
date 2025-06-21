@@ -47,7 +47,10 @@ public class ContactoIndividualApp implements ContactoIndividualService {
 	public void delete(String ID) {
 		repository.delete(ID);
 	}
-	
-	
+
+	@Override
+	public void update(ContactoIndividual c) {
+		repository.update(c);
+	}
 
 }

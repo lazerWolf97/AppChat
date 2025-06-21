@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import umu.tds.AppChat.dominio.Contacto;
 import umu.tds.AppChat.dominio.ContactoIndividual;
 import umu.tds.AppChat.dominio.Usuario;
 import umu.tds.AppChat.service.ContactoIndividualService;
@@ -39,8 +40,19 @@ public class CrearContactoController {
 		if(u.isEmpty())
 			throw new UserException("No existe ningún usuario con ese teléfono.", UserErrorType.USERNOTFOUND);
 		
-		ContactoIndividual c = new ContactoIndividual(nombre, u.get());
+		for(Contacto c : CurrentSession.getUsuarioActual().getContactos()) {
+			if(c instanceof ContactoIndividual) {
+				ContactoIndividual ci = (ContactoIndividual) c;
+				if(ci.getNumTLF().compareTo(telefono) == 0) {
+					ci.setNombre(nombre);
+					cService.update(ci);
+					uService.update(CurrentSession.getUsuarioActual());
+					return;
+				}
+			}
+		}
 		
+		ContactoIndividual c = new ContactoIndividual(nombre, u.get());
 		CurrentSession.getUsuarioActual().addContacto(c);
 		cService.add(c);
 		uService.update(CurrentSession.getUsuarioActual());

@@ -26,7 +26,7 @@ public class SignupController {
 		view.showWindow();
 	}
 	
-	public void register(String numTLF, String nombre, String email, String password, String confirm, LocalDate fechan, String saludo)
+	public void register(String numTLF, String nombre, String email, String password, String confirm, LocalDate fechan)
 	throws UserException {
 		if (password.length() < 8) {
 			throw new UserException("Por motivos de seguridad, la contraseña debe de tener al menos 8 caracteres.",
@@ -40,7 +40,6 @@ public class SignupController {
 		}
 		else {
 			Usuario u = new Usuario(numTLF, nombre, email, password, fechan.toString());
-			u.setSaludo(saludo);
 			uService.registrar(u);
 		}
 	}

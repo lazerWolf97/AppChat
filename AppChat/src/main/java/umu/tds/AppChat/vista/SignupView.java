@@ -49,7 +49,6 @@ public class SignupView {
 	private JPasswordField passwordField;
 	private JPasswordField passwordField_confirmar;
 	private JDateChooser date_fechan;
-	private JTextArea txt_saludo;
 	
 	private File imagenseleccionada;
 
@@ -210,27 +209,6 @@ public class SignupView {
 		panel_4.add(textField_email, gbc_textField_email);
 		textField_email.setColumns(10);
 		
-		JLabel lbl_saludo = new JLabel("Saludo");
-		lbl_saludo.setVerticalAlignment(SwingConstants.TOP);
-		lbl_saludo.setFont(new Font("Roboto Condensed", Font.PLAIN, 20));
-		GridBagConstraints gbc_lbl_saludo = new GridBagConstraints();
-		gbc_lbl_saludo.insets = new Insets(0, 0, 0, 5);
-		gbc_lbl_saludo.gridx = 0;
-		gbc_lbl_saludo.gridy = 4;
-		panel_4.add(lbl_saludo, gbc_lbl_saludo);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane.gridx = 1;
-		gbc_scrollPane.gridy = 4;
-		panel_4.add(scrollPane, gbc_scrollPane);
-		
-		txt_saludo = new JTextArea();
-		txt_saludo.setFont(new Font("Roboto Condensed", Font.PLAIN, 13));
-		txt_saludo.setText("Greetings! :)");
-		scrollPane.setViewportView(txt_saludo);
-		
 		JPanel panel_5 = new JPanel();
 		panel_5.setBorder(new CompoundBorder(new EmptyBorder(8, 8, 8, 8), new TitledBorder(new LineBorder(new Color(0, 0, 0), 2, true), "Foto de perfil", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0))));
 		panel_3.add(panel_5);
@@ -271,8 +249,7 @@ public class SignupView {
 							new String(passwordField_confirmar.getPassword()),
 							date_fechan.getDate().toInstant()
 						      .atZone(ZoneId.systemDefault())
-						      .toLocalDate(),
-						     new String(txt_saludo.getText()));
+						      .toLocalDate());
 					controller.mostrarLogin();
 					frmAppchatSignup.dispose();
 				}

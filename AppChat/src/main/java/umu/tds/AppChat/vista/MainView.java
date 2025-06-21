@@ -3,6 +3,8 @@ package umu.tds.AppChat.vista;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -26,7 +28,9 @@ import umu.tds.AppChat.dominio.Contacto;
 import umu.tds.AppChat.dominio.ContactoIndividual;
 import umu.tds.AppChat.dominio.Grupo;
 import umu.tds.AppChat.dominio.Mensaje;
+import umu.tds.AppChat.vista.observer.AbrirChatEvent;
 import umu.tds.AppChat.vista.observer.ChatListener;
+import umu.tds.AppChat.vista.observer.MensajeEvent;
 import umu.tds.AppChat.vista.observer.PerfilEvent;
 import umu.tds.AppChat.vista.observer.PerfilListener;
 
@@ -46,12 +50,16 @@ public class MainView implements PerfilListener, ChatListener {
 	private JButton btn_perfil;
 	
 	private ChatController controller;
+	
+	private DateTimeFormatter formatter = DateTimeFormatter
+			.ofPattern("[dd/MM/yyyy] HH:mm");
 
 	/**
 	 * Create the application.
 	 */
 	public MainView(ChatController controller) {
 		this.controller = controller;
+		controller.addChatListener(this);
 		initialize();
 	}
 	
@@ -86,7 +94,7 @@ public class MainView implements PerfilListener, ChatListener {
 		JButton btn_nuevogrupo = new JButton("Nuevo Grupo");
 		panel_funciones.add(btn_nuevogrupo);
 		
-		JButton btn_nuevocontacto = new JButton("NuevoContacto");
+		JButton btn_nuevocontacto = new JButton("Nuevo Contacto");
 		panel_funciones.add(btn_nuevocontacto);
 		
 		Component horizontalGlue = Box.createHorizontalGlue();
@@ -213,20 +221,26 @@ public class MainView implements PerfilListener, ChatListener {
 	}
 
 	@Override
-	public void enviarMensaje(String mensaje) {
-		// TODO Auto-generated method stub
-		
+	public void enviarMensaje(MensajeEvent e) {
+		for (Component c : panel_chat.getComponents()) {
+		    if (c instanceof ChatPanel cp) {
+		        cp.agregarMensaje(e.getMensaje(), e.getFecha().format(formatter), true);
+		    }
+		}
 	}
 
 	@Override
-	public void recibirMensaje(String mensaje) {
-		// TODO Auto-generated method stub
-		
+	public void recibirMensaje(MensajeEvent e) {
+		for (Component c : panel_chat.getComponents()) {
+		    if (c instanceof ChatPanel cp) {
+		       cp.agregarMensaje(e.getMensaje(), e.getFecha().format(formatter), false);
+		    }
+		}
 	}
 
 	@Override
-	public void abrirChat(String numTLF, String nombre) {
-		mostrarChat(nombre, numTLF);
+	public void abrirChat(AbrirChatEvent e) {
+		mostrarChat(e.getNombre(), e.getNumTLF());
 	}
 
 }

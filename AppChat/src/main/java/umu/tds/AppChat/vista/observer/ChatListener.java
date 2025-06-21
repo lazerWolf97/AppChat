@@ -2,7 +2,7 @@ package umu.tds.AppChat.vista.observer;
 
 public interface ChatListener {
 
-	public void enviarMensaje(String mensaje);
-	public void recibirMensaje(String mensaje);
-	public void abrirChat(String numTLF, String nombre);
+	public void enviarMensaje(MensajeEvent e);
+	public void recibirMensaje(MensajeEvent e);
+	public void abrirChat(AbrirChatEvent e);
 }

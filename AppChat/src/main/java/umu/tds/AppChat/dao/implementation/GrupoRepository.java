@@ -40,4 +40,9 @@ public class GrupoRepository implements GrupoDAO {
 		em.createQuery("delete from Grupo g where g.id = :id").setParameter("id", ID).executeUpdate();
 	}
 
+	@Override
+	public void update(Grupo g) {
+		em.merge(g);
+	}
+
 }

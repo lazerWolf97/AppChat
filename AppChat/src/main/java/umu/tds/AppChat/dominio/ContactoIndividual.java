@@ -22,4 +22,5 @@ public class ContactoIndividual extends Contacto {
 	public String getNumTLF() {
 		return usuario.getNumTLF();
 	}
+
 }
