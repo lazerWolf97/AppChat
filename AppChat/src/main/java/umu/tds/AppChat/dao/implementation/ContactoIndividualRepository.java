@@ -29,6 +29,13 @@ public class ContactoIndividualRepository implements ContactoIndividualDAO {
 		return em.createQuery("select c from ContactoIndividual c where c.nombre like :name")
 				.setParameter("name", name).getResultList();
 	}
+	
+	public List<ContactoIndividual> findByNameAndUser(String name, String userID) {
+		return em.createQuery("select c from ContactoIndividual c where c.nombre like :name "
+				+ "AND c.usuario = :id")
+				.setParameter("id", userID)
+				.setParameter("name", name).getResultList();
+	}
 
 	@Override
 	public void add(ContactoIndividual c) {

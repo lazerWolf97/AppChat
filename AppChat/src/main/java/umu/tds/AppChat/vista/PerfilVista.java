@@ -15,47 +15,54 @@ import javax.swing.border.EmptyBorder;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.ZoneId;
+
 import javax.swing.JTextField;
+import javax.swing.JTextArea;
+import com.toedter.calendar.JDateChooser;
+
+import umu.tds.AppChat.controller.PerfilController;
+import umu.tds.AppChat.vista.observer.PerfilEvent;
+import umu.tds.AppChat.vista.observer.PerfilListener;
 
 public class PerfilVista {
 
-	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PerfilVista window = new PerfilVista();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private JFrame frmEditarPerfil;
+	private JTextField textField_nombre;
+	private JTextField textField_email;
+	private JDateChooser dateChooser;
+	
+	private PerfilController controller;
+	
+	private PerfilListener listener;
 
 	/**
 	 * Create the application.
 	 */
-	public PerfilVista() {
+	public PerfilVista(PerfilController controller, PerfilListener listener) {
+		this.controller = controller;
+		this.listener = listener;
 		initialize();
+	}
+	
+	public void showWindow() {
+		frmEditarPerfil.setLocationRelativeTo(null);
+		frmEditarPerfil.setVisible(true);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frmEditarPerfil = new JFrame();
+		frmEditarPerfil.setTitle("Editar Perfil");
+		frmEditarPerfil.setBounds(100, 100, 450, 300);
+		frmEditarPerfil.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel, BorderLayout.EAST);
+		frmEditarPerfil.getContentPane().add(panel, BorderLayout.EAST);
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new EmptyBorder(8, 8, 8, 8));
@@ -73,22 +80,22 @@ public class PerfilVista {
 		panel_3.add(btnNewButton_2);
 		
 		JPanel panel_1 = new JPanel();
-		frame.getContentPane().add(panel_1, BorderLayout.SOUTH);
+		frmEditarPerfil.getContentPane().add(panel_1, BorderLayout.SOUTH);
 		
-		JButton btnNewButton = new JButton("Aceptar");
-		panel_1.add(btnNewButton);
+		JButton btn_aceptar = new JButton("Aceptar");
+		panel_1.add(btn_aceptar);
 		
-		JButton btnNewButton_1 = new JButton("Cancelar");
-		panel_1.add(btnNewButton_1);
+		JButton btn_cancelar = new JButton("Cancelar");
+		panel_1.add(btn_cancelar);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new EmptyBorder(12, 12, 12, 12));
-		frame.getContentPane().add(panel_2, BorderLayout.CENTER);
+		frmEditarPerfil.getContentPane().add(panel_2, BorderLayout.CENTER);
 		GridBagLayout gbl_panel_2 = new GridBagLayout();
 		gbl_panel_2.columnWidths = new int[]{0, 0, 0};
-		gbl_panel_2.rowHeights = new int[]{0, 0, 0, 0};
+		gbl_panel_2.rowHeights = new int[]{0, 0, 0, 0, 0};
 		gbl_panel_2.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_panel_2.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_2.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		panel_2.setLayout(gbl_panel_2);
 		
 		JLabel lblNewLabel = new JLabel("Nombre");
@@ -99,14 +106,14 @@ public class PerfilVista {
 		gbc_lblNewLabel.gridy = 0;
 		panel_2.add(lblNewLabel, gbc_lblNewLabel);
 		
-		textField = new JTextField();
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.insets = new Insets(0, 0, 5, 0);
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.gridx = 1;
-		gbc_textField.gridy = 0;
-		panel_2.add(textField, gbc_textField);
-		textField.setColumns(10);
+		textField_nombre = new JTextField();
+		GridBagConstraints gbc_textField_nombre = new GridBagConstraints();
+		gbc_textField_nombre.insets = new Insets(0, 0, 5, 0);
+		gbc_textField_nombre.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_nombre.gridx = 1;
+		gbc_textField_nombre.gridy = 0;
+		panel_2.add(textField_nombre, gbc_textField_nombre);
+		textField_nombre.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Email");
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
@@ -116,21 +123,68 @@ public class PerfilVista {
 		gbc_lblNewLabel_1.gridy = 1;
 		panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
 		
-		textField_1 = new JTextField();
-		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-		gbc_textField_1.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_1.gridx = 1;
-		gbc_textField_1.gridy = 1;
-		panel_2.add(textField_1, gbc_textField_1);
-		textField_1.setColumns(10);
+		textField_email = new JTextField();
+		GridBagConstraints gbc_textField_email = new GridBagConstraints();
+		gbc_textField_email.insets = new Insets(0, 0, 5, 0);
+		gbc_textField_email.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_email.gridx = 1;
+		gbc_textField_email.gridy = 1;
+		panel_2.add(textField_email, gbc_textField_email);
+		textField_email.setColumns(10);
 		
 		JLabel lbl_fecha = new JLabel("Fecha nacimiento");
 		GridBagConstraints gbc_lbl_fecha = new GridBagConstraints();
-		gbc_lbl_fecha.insets = new Insets(0, 0, 0, 5);
+		gbc_lbl_fecha.anchor = GridBagConstraints.EAST;
+		gbc_lbl_fecha.insets = new Insets(0, 0, 5, 5);
 		gbc_lbl_fecha.gridx = 0;
 		gbc_lbl_fecha.gridy = 2;
 		panel_2.add(lbl_fecha, gbc_lbl_fecha);
+		
+		dateChooser = new JDateChooser();
+		GridBagConstraints gbc_dateChooser = new GridBagConstraints();
+		gbc_dateChooser.insets = new Insets(0, 0, 5, 0);
+		gbc_dateChooser.fill = GridBagConstraints.BOTH;
+		gbc_dateChooser.gridx = 1;
+		gbc_dateChooser.gridy = 2;
+		panel_2.add(dateChooser, gbc_dateChooser);
+		
+		JLabel lblNewLabel_2 = new JLabel("Saludo");
+		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
+		gbc_lblNewLabel_2.insets = new Insets(0, 0, 0, 5);
+		gbc_lblNewLabel_2.gridx = 0;
+		gbc_lblNewLabel_2.gridy = 3;
+		panel_2.add(lblNewLabel_2, gbc_lblNewLabel_2);
+		
+		JTextArea textArea_saludo = new JTextArea();
+		GridBagConstraints gbc_textArea_saludo = new GridBagConstraints();
+		gbc_textArea_saludo.fill = GridBagConstraints.BOTH;
+		gbc_textArea_saludo.gridx = 1;
+		gbc_textArea_saludo.gridy = 3;
+		panel_2.add(textArea_saludo, gbc_textArea_saludo);
+		
+		addManejadorAceptar(btn_aceptar);
+		addManejadorCancelar(btn_cancelar);
+	}
+	
+	private void addManejadorAceptar(JButton btn_aceptar) {
+		btn_aceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.actualizar(textField_nombre.getText(), textField_email.getText(),
+						dateChooser.getDate().toInstant()
+					      .atZone(ZoneId.systemDefault())
+					      .toLocalDate());
+				listener.updatePerfil(new PerfilEvent(this, textField_nombre.getText()));
+				frmEditarPerfil.dispose();
+			}
+		});
+	}
+	
+	private void addManejadorCancelar(JButton btn_cancelar) {
+		btn_cancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmEditarPerfil.dispose();
+			}
+		});
 	}
 
 }

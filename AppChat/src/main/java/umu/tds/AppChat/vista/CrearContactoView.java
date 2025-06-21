@@ -13,6 +13,9 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
@@ -113,6 +116,30 @@ public class CrearContactoView {
 		gbc_textField_nombre.gridy = 1;
 		panel_2.add(textField_nombre, gbc_textField_nombre);
 		textField_nombre.setColumns(10);
+		
+		addManejadorCrear(btn_crear_contacto);
+		addManejadorCancelar(btn_cancelar);
 	}
+	
+	private void addManejadorCrear(JButton btn_crear_contacto) {
+		btn_crear_contacto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.crearContacto(textField_nombre.getText(), textField_tlf.getText());
+				controller.mostrarVentanaPrincipal();
+				
+				frmCrearContacto.dispose();
+			}
+		});
+	}
+	
+	private void addManejadorCancelar(JButton btn_cancelar) {
+		btn_cancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.mostrarVentanaPrincipal();
+				frmCrearContacto.dispose();
+			}
+		});
+	}
+	
 
 }

@@ -29,4 +29,10 @@ public abstract class Contacto {
 		return nombre;
 	}
 	
+	// Para el ComboBox de la Ventana Principal
+	@Override
+	public String toString() {
+		return nombre;
+	}
+	
 }

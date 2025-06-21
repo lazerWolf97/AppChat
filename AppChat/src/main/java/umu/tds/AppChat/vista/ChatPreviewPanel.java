@@ -1,6 +1,8 @@
 package umu.tds.AppChat.vista;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -62,8 +64,16 @@ public class ChatPreviewPanel extends JPanel {
 		JLabel lbl_fecha = new JLabel(fecha.format(formatter));
 		panel_1.add(lbl_fecha, BorderLayout.WEST);
 		
-		JButton btn_newcontacto = new JButton("Añadir contacto");
-		panel_1.add(btn_newcontacto, BorderLayout.EAST);
+		JButton btn_abrirchat = new JButton("Abrir Chat");
+		panel_1.add(btn_abrirchat, BorderLayout.EAST);
+	}
+	
+	private void addManejadorAbrir(JButton btn_abrirchat) {
+		btn_abrirchat.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 	}
 
 }

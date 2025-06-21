@@ -8,6 +8,7 @@ public interface ContactoIndividualService {
 
 	public List<ContactoIndividual> findAll();
 	public List<ContactoIndividual> findByName(String name);
+	public List<ContactoIndividual> findByNameAndUser(String name, String userID);
 	public void add(ContactoIndividual c);
 	public void delete(String ID);
 }

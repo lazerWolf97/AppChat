@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import umu.tds.AppChat.service.*;
+import umu.tds.AppChat.vista.observer.PerfilListener;
 
 @Component
 public class AppController {
@@ -41,7 +42,7 @@ public class AppController {
     }
     
     public void mostrarSearch() {
-    	SearchController searchController = new SearchController(uService, mService, this);
+    	SearchController searchController = new SearchController(uService, mService, cService, this);
     	searchController.initialize();
     }
     
@@ -54,5 +55,11 @@ public class AppController {
     	CrearContactoController contactoController = 
     			new CrearContactoController(cService, uService, this);
     	contactoController.initialize();
+    }
+    
+    public void mostrarPerfil(PerfilListener listener) {
+    	PerfilController perfilController = new PerfilController(uService, this);
+    	perfilController.setListener(listener);
+    	perfilController.initialize();
     }
 }

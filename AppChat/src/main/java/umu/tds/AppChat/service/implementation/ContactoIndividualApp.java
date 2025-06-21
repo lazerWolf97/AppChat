@@ -29,6 +29,14 @@ public class ContactoIndividualApp implements ContactoIndividualService {
 			throw new UserException("No existe un contacto con ese nombre.", UserErrorType.USERNOTFOUND);
 		return lc;
 	}
+	
+	@Override
+	public List<ContactoIndividual> findByNameAndUser(String name, String userID) {
+		List<ContactoIndividual> lc = repository.findByName(name);
+		if(lc.isEmpty())
+			throw new UserException("No existe un contacto con ese nombre.", UserErrorType.USERNOTFOUND);
+		return lc;
+	}
 
 	@Override
 	public void add(ContactoIndividual c) {

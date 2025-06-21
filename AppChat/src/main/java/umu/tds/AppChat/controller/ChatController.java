@@ -6,10 +6,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
-import javax.swing.JFrame;
-
 import org.springframework.stereotype.Component;
 
+import umu.tds.AppChat.dominio.Contacto;
 import umu.tds.AppChat.dominio.ContactoIndividual;
 import umu.tds.AppChat.dominio.Mensaje;
 import umu.tds.AppChat.dominio.Usuario;
@@ -19,6 +18,7 @@ import umu.tds.AppChat.service.MensajeService;
 import umu.tds.AppChat.service.UsuarioService;
 import umu.tds.AppChat.session.CurrentSession;
 import umu.tds.AppChat.vista.MainView;
+import umu.tds.AppChat.vista.observer.PerfilListener;
 
 @Component
 public class ChatController {
@@ -28,6 +28,8 @@ public class ChatController {
 	private final GrupoService gService;
 	private final ContactoIndividualService cService;
 	private final AppController controller;
+	
+	private PerfilListener listener;
 	
 	public ChatController(UsuarioService uService, MensajeService mService,
 			GrupoService gService, ContactoIndividualService cService ,AppController controller) {
@@ -55,6 +57,10 @@ public class ChatController {
 		controller.mostrarCrearContacto();
 	}
 	
+	public void mostrarPerfil(PerfilListener listener) {
+		controller.mostrarPerfil(listener);
+	}
+	
 	public List<Mensaje> getMensajes(){
 		return mService.findAllByUser(CurrentSession.getUsuarioActual().getNumTLF());
 	}
@@ -70,6 +76,10 @@ public class ChatController {
 	
 	public List<Mensaje> getUltimosMensajes() {
 		return mService.findLastByUser(CurrentSession.getUsuarioActual().getNumTLF());
+	}
+	
+	public List<Contacto> getContactos() {
+		return CurrentSession.getUsuarioActual().getContactos();
 	}
 	
 	public Optional<ContactoIndividual> getContactoIndividual(Usuario u) {

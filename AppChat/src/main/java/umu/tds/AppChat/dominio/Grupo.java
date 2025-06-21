@@ -17,8 +17,21 @@ public class Grupo extends Contacto {
 		contactos = new LinkedList<ContactoIndividual>();
 	}
 	
+	public Grupo(String nombre, List<ContactoIndividual> lista) {
+		super(nombre);
+		contactos = lista;
+	}
+	
 	public Grupo() {
 		super();
+	}
+	
+	public List<ContactoIndividual> getContactos (){
+		return contactos;
+	}
+	
+	public void addContacto(ContactoIndividual c) {
+		contactos.add(c);
 	}
 
 }

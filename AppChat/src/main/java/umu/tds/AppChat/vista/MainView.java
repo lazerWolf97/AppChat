@@ -22,7 +22,13 @@ import javax.swing.JLabel;
 import javax.swing.border.TitledBorder;
 
 import umu.tds.AppChat.controller.ChatController;
+import umu.tds.AppChat.dominio.Contacto;
+import umu.tds.AppChat.dominio.ContactoIndividual;
+import umu.tds.AppChat.dominio.Grupo;
 import umu.tds.AppChat.dominio.Mensaje;
+import umu.tds.AppChat.vista.observer.ChatListener;
+import umu.tds.AppChat.vista.observer.PerfilEvent;
+import umu.tds.AppChat.vista.observer.PerfilListener;
 
 import javax.swing.border.EtchedBorder;
 import javax.swing.JScrollPane;
@@ -30,12 +36,14 @@ import javax.swing.JScrollBar;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JList;
 
-public class MainView {
+public class MainView implements PerfilListener, ChatListener {
 
 	private JFrame frmAppchat;
 	private JPanel panel_chat;
 	private JPanel panel_mensajes;
-	private JComboBox<String> comboBox;
+	private JComboBox<Contacto> comboBox;
+	
+	private JButton btn_perfil;
 	
 	private ChatController controller;
 
@@ -68,7 +76,8 @@ public class MainView {
 		frmAppchat.getContentPane().add(panel_funciones, BorderLayout.NORTH);
 		panel_funciones.setLayout(new BoxLayout(panel_funciones, BoxLayout.X_AXIS));
 		
-		comboBox = new JComboBox<String>();
+		comboBox = new JComboBox<Contacto>();
+		controller.getContactos().stream().forEach(c -> comboBox.addItem(c));
 		panel_funciones.add(comboBox);
 		
 		JButton btn_abrirchat = new JButton("Abrir Chat");
@@ -89,7 +98,7 @@ public class MainView {
 		Component horizontalGlue_1 = Box.createHorizontalGlue();
 		panel_funciones.add(horizontalGlue_1);
 		
-		JButton btn_perfil = new JButton(controller.getCurrentUsername());
+		btn_perfil = new JButton(controller.getCurrentUsername());
 		panel_funciones.add(btn_perfil);
 		
 		panel_mensajes = new JPanel();
@@ -106,7 +115,12 @@ public class MainView {
 		panel_chat.setLayout(new BorderLayout(0, 0));
 		
 		addManejadorBuscar(btn_buscar);
+		addManejadorNuevoContacto(btn_nuevocontacto);
+		addManejadorAbrirChat(btn_abrirchat);
+		addManejadorPerfil(btn_perfil);
+		addManejadorNuevoGrupo(btn_nuevogrupo);
 		mostrarChat("David", "123456789");
+		
 		mostrarListaChats();
 	}
 	
@@ -121,7 +135,40 @@ public class MainView {
 	private void addManejadorNuevoContacto(JButton btn_nuevocontacto) {
 		btn_nuevocontacto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.mostrarSearch();
+				controller.mostrarCrearContacto();
+				frmAppchat.dispose();
+			}
+		});
+	}
+	
+	private void addManejadorNuevoGrupo(JButton btn_nuevogrupo) {
+		btn_nuevogrupo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.mostrarCrearGrupo();
+				frmAppchat.dispose();
+			}
+		});
+	}
+	
+	private void addManejadorPerfil(JButton btn_perfil) {
+		btn_perfil.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.mostrarPerfil(MainView.this);
+			}
+		});
+	}
+	
+	private void addManejadorAbrirChat(JButton btn_abrirchat) {
+		btn_abrirchat.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Contacto c = (Contacto) comboBox.getSelectedItem();
+				
+				if(c instanceof ContactoIndividual) {
+					ContactoIndividual ci = (ContactoIndividual) c;
+					mostrarChat(ci.getNombre(), ci.getNumTLF());
+				}
+				// TODO ENVIAR MENSAJE A GRUPO
+				
 			}
 		});
 	}
@@ -150,6 +197,7 @@ public class MainView {
 		}
 		
 	    JScrollPane scrollPane = new JScrollPane(listaPanel);
+	    listaPanel.setLayout(new BoxLayout(listaPanel, BoxLayout.Y_AXIS));
 	    scrollPane.setBorder(null);
 	    scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
@@ -157,6 +205,28 @@ public class MainView {
 	    panel_mensajes.add(scrollPane, BorderLayout.CENTER);
 	    panel_mensajes.revalidate();
 	    panel_mensajes.repaint();
+	}
+
+	@Override
+	public void updatePerfil(PerfilEvent e) {
+		btn_perfil.setText(e.getNombre());
+	}
+
+	@Override
+	public void enviarMensaje(String mensaje) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void recibirMensaje(String mensaje) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void abrirChat(String numTLF, String nombre) {
+		mostrarChat(nombre, numTLF);
 	}
 
 }

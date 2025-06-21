@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import umu.tds.AppChat.dao.UsuarioDAO;
 import umu.tds.AppChat.dominio.CatalogoUsuarios;
+import umu.tds.AppChat.dominio.Contacto;
+import umu.tds.AppChat.dominio.ContactoIndividual;
+import umu.tds.AppChat.dominio.Grupo;
 import umu.tds.AppChat.dominio.Usuario;
 import umu.tds.AppChat.service.UsuarioService;
 import umu.tds.exceptions.UserException;
@@ -60,6 +63,7 @@ public class UsuarioApp implements UsuarioService {
 		Optional<Usuario> uopt = catalogo.getUsuario(numTLF);
 		if(uopt.isEmpty())
 			throw new UserException("Usuario no encontrado.", UserErrorType.USERNOTFOUND);
+		
 		return uopt;
 	}
 
@@ -76,5 +80,4 @@ public class UsuarioApp implements UsuarioService {
 		repository.delete(numTLF);
 		catalogo.reload();
 	}
-	
 }

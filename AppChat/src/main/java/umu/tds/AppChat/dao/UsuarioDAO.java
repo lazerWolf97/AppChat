@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
+import umu.tds.AppChat.dominio.Contacto;
 import umu.tds.AppChat.dominio.Usuario;
 
 @Repository

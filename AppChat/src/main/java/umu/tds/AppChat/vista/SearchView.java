@@ -134,9 +134,7 @@ public class SearchView {
 	private void addManejadorBuscar(JButton btn_buscar) {
 		btn_buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(comboBox.getSelectedIndex() == 1) {
-					mostrarMensajesNumero();
-				}
+				mostrarMensajesNumero();
 				
 			}
 		});
@@ -153,11 +151,16 @@ public class SearchView {
 	private void mostrarMensajesNumero() {
 		panel_mensajes.removeAll();
 		
+		List<Mensaje> listaMensajes;
+		
 		// JPanel listaPanel = new MensajePanel?
 		JPanel listaPanel = new JPanel();
 		listaPanel.setLayout(new BoxLayout(listaPanel, BoxLayout.Y_AXIS));
-		List<Mensaje> listaMensajes = controller.buscarMensajesPorNumero(textField_texto.getText(), text_nombre.getText());
-		
+		if(comboBox.getSelectedIndex() == 1)
+			listaMensajes = controller.buscarMensajesPorNumero(textField_texto.getText(), text_nombre.getText());
+		else
+			listaMensajes = controller.buscarMensajesPorContacto(textField_texto.getText(), text_nombre.getText());
+			
 		for(Mensaje m : listaMensajes) {
 			MensajePanel mp = new MensajePanel(m.getTexto(), m.getEmisor().getNumTLF(), m.getReceptor().getNumTLF(), m.getFechaHora());
 			listaPanel.add(mp);

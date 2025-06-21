@@ -26,7 +26,7 @@ public class Usuario {
 	@Column(name="saludo")
 	private String saludo;
 	
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name="contactos")
 	private List<Contacto> contactos;
 	@OneToMany
@@ -83,6 +83,10 @@ public class Usuario {
 		return fnacimiento;
 	}
 	
+	public List<Contacto> getContactos() {
+		return contactos;
+	}
+	
 	public String getSaludo() {
 		return saludo;
 	}
@@ -107,8 +111,16 @@ public class Usuario {
 		this.fnacimiento = LocalDate.parse(fNacimiento);
 	}
 	
+	public void setFnacimiento(LocalDate fNacimiento) {
+		this.fnacimiento = fNacimiento;
+	}
+	
 	public void setSaludo(String saludo) {
 		this.saludo = saludo;
+	}
+	
+	public void addContacto(Contacto c) {
+		contactos.add(c);
 	}
 	
 	public Optional<ContactoIndividual> getContactoIndividual(Usuario u) {

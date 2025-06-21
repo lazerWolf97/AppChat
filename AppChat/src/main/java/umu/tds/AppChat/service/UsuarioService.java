@@ -3,6 +3,7 @@ package umu.tds.AppChat.service;
 import java.util.List;
 import java.util.Optional;
 
+import umu.tds.AppChat.dominio.Contacto;
 import umu.tds.AppChat.dominio.Usuario;
 
 public interface UsuarioService {
