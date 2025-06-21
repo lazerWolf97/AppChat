@@ -1,7 +1,9 @@
 package umu.tds.AppChat.dominio;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.persistence.*;
 
@@ -58,6 +60,10 @@ public class Mensaje implements Comparable<Mensaje> {
 
 	public LocalTime getHora() {
 		return hora;
+	}
+	
+	public LocalDateTime getFechaHora() {
+		return LocalDateTime.of(fecha, hora);
 	}
 
 	public Usuario getEmisor() {

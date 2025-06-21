@@ -8,6 +8,9 @@ import java.awt.BorderLayout;
 import javax.swing.border.EmptyBorder;
 import javax.swing.BoxLayout;
 import javax.swing.border.TitledBorder;
+
+import umu.tds.AppChat.controller.CrearGrupoController;
+
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.JButton;
@@ -18,32 +21,20 @@ import javax.swing.JScrollPane;
 public class GrupoView {
 
 	private JFrame frmAppchatCrear;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GrupoView window = new GrupoView();
-					window.frmAppchatCrear.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
+	private CrearGrupoController controller;
 
 	/**
 	 * Create the application.
 	 */
-	public GrupoView() {
+	public GrupoView(CrearGrupoController controller) {
+		this.controller = controller;
 		initialize();
 	}
 	
 	public void showWindow() {
-		
+		frmAppchatCrear.setLocationRelativeTo(null);
+		frmAppchatCrear.setVisible(true);
 	}
 
 	/**

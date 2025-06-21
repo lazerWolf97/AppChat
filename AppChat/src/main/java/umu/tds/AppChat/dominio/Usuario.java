@@ -139,4 +139,12 @@ public class Usuario {
 	public boolean comprobarClave(String password) {
 		return this.password.compareTo(password) == 0;
 	}
+	
+	public boolean compararTLF(Usuario u) {
+		return numTLF.compareTo(u.getNumTLF()) == 0;
+	}
+	
+	public boolean compararTLF(String ntlf) {
+		return numTLF.compareTo(ntlf) == 0;
+	}
 }

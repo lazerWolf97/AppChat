@@ -3,8 +3,14 @@ package umu.tds.AppChat.vista;
 import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import umu.tds.AppChat.controller.ChatController;
+import umu.tds.AppChat.dominio.Mensaje;
+import umu.tds.AppChat.session.CurrentSession;
 
 public class ChatPanel extends JPanel {
 
@@ -13,13 +19,18 @@ public class ChatPanel extends JPanel {
     private final ChatController controller;
     private final String contactoNombre;
     private final String contactoTLF;
+    
+    private DateTimeFormatter formatter = DateTimeFormatter
+    			.ofPattern("[dd/MM/yyyy] HH:mm");
 
     public ChatPanel(ChatController controller, String contactoNombre, String contactoTLF) {
         this.controller = controller;
         this.contactoNombre = contactoNombre;
         this.contactoTLF = contactoTLF;
+        
         initialize();
         cargarMensajes();
+        
     }
 
     private void initialize() {
@@ -60,41 +71,66 @@ public class ChatPanel extends JPanel {
         JScrollPane scrollPane = new JScrollPane(panel_chats);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         add(scrollPane, BorderLayout.CENTER);
-
+        
         btnEnviar.addActionListener(e -> {
             String texto = textField.getText().trim();
             if (!texto.isEmpty()) {
-                // controller.enviarMensajeActual(contactoNombre, texto);
-                agregarMensaje(texto, true);
+            	controller.registerMensaje(texto, lbl_telefono.getText());
+                agregarMensaje(texto, LocalDateTime.now().format(formatter), true);
                 textField.setText("");
             }
         });
     }
 
     private void cargarMensajes() {
-        List<String> mensajes = controller.getMensajesCon(contactoTLF);
-        mensajes.forEach(m -> agregarMensaje(m, true));
+        List<Mensaje> mensajes = controller.getMensajesCon(contactoTLF);
+        for(Mensaje m : mensajes) {
+        	agregarMensaje(m.getTexto(), m.getFechaHora().format(formatter),
+        			m.getEmisor().compararTLF(CurrentSession.getUsuarioActual()));
+        	
+        }
     }
 
-    public void agregarMensaje(String texto, boolean esEmisor) {
+    public void agregarMensaje(String texto, String fechahora, boolean esEmisor) {
         JPanel mensajePanel = new JPanel(new BorderLayout());
         mensajePanel.setBackground(new Color(255, 255, 255));
         mensajePanel.setBorder(new EmptyBorder(5, 10, 5, 10));
 
+        // Panel interno con BoxLayout vertical (para fecha y mensaje)
+        JPanel burbujaPanel = new JPanel();
+        burbujaPanel.setLayout(new BoxLayout(burbujaPanel, BoxLayout.Y_AXIS));
+        burbujaPanel.setOpaque(true);
+        burbujaPanel.setBorder(new CompoundBorder(
+            new LineBorder(Color.GRAY, 1, true),
+            new EmptyBorder(5, 8, 5, 8)
+        ));
+        burbujaPanel.setBackground(esEmisor ? new Color(220, 248, 198) : Color.LIGHT_GRAY);
+
+        // Label de fecha y hora
+        JLabel fechaLabel = new JLabel(fechahora);
+        fechaLabel.setFont(new Font("Roboto", Font.PLAIN, 10));
+        fechaLabel.setForeground(Color.DARK_GRAY);
+        fechaLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        // Label del mensaje
         JLabel mensajeLabel = new JLabel(texto);
-        mensajeLabel.setOpaque(true);
-        mensajeLabel.setBorder(new LineBorder(Color.GRAY, 1, true));
-        mensajeLabel.setBackground(esEmisor ? new Color(220, 248, 198) : Color.LIGHT_GRAY);
+        mensajeLabel.setFont(new Font("Roboto Condensed", Font.PLAIN, 14));
+        mensajeLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        burbujaPanel.add(fechaLabel);
+        burbujaPanel.add(Box.createVerticalStrut(4));
+        burbujaPanel.add(mensajeLabel);
 
         if (esEmisor) {
-            mensajePanel.add(mensajeLabel, BorderLayout.EAST);
+            mensajePanel.add(burbujaPanel, BorderLayout.EAST);
         } else {
-            mensajePanel.add(mensajeLabel, BorderLayout.WEST);
+            mensajePanel.add(burbujaPanel, BorderLayout.WEST);
         }
 
         panel_chats.add(mensajePanel);
         panel_chats.revalidate();
         panel_chats.repaint();
+
         SwingUtilities.invokeLater(() -> getVerticalScrollBar().setValue(getVerticalScrollBar().getMaximum()));
     }
 

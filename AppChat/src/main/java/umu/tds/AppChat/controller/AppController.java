@@ -12,15 +12,21 @@ public class AppController {
 
     private final UsuarioService uService;
     private final MensajeService mService;
+    private final GrupoService gService;
+    private final ContactoIndividualService cService;
 
     @Autowired
-    public AppController(UsuarioService uService, MensajeService mService) {
+    public AppController(UsuarioService uService, MensajeService mService,
+    		GrupoService gService, ContactoIndividualService cService) {
         this.uService = uService;
         this.mService = mService;
+        this.gService = gService;
+        this.cService = cService;
     }
 
     public void mostrarVentanaPrincipal() {
-        ChatController chatController = new ChatController(uService, mService, this);
+        ChatController chatController = 
+        		new ChatController(uService, mService, gService, cService, this);
         chatController.initialize();
     }
 
@@ -35,7 +41,18 @@ public class AppController {
     }
     
     public void mostrarSearch() {
-    	SearchController searchController = new SearchController(mService, this);
+    	SearchController searchController = new SearchController(uService, mService, this);
     	searchController.initialize();
+    }
+    
+    public void mostrarCrearGrupo() {
+    	CrearGrupoController grupoController = new CrearGrupoController(gService, this);
+    	grupoController.initialize();
+    }
+    
+    public void mostrarCrearContacto() {
+    	CrearContactoController contactoController = 
+    			new CrearContactoController(cService, uService, this);
+    	contactoController.initialize();
     }
 }

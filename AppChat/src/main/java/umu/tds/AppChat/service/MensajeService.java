@@ -10,5 +10,6 @@ public interface MensajeService {
 	public List<Mensaje> findAllByUser(String userID);
 	public List<Mensaje> findAllByTwoUsers(String firstuserID, String seconduserID);
 	public List<Mensaje> findByUserAndText(String userID, String text);
+	public List<Mensaje> findLastByUser(String userID);
 	public void add(Mensaje m);
 }

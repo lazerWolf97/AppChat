@@ -15,7 +15,6 @@ public class Grupo extends Contacto {
 	public Grupo(String nombre) {
 		super(nombre);
 		contactos = new LinkedList<ContactoIndividual>();
-		// TODO Add imagen
 	}
 	
 	public Grupo() {

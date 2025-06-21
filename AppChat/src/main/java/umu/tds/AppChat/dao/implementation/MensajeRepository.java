@@ -26,27 +26,27 @@ public class MensajeRepository implements MensajeDAO {
 	
 	@Override
 	public List<Mensaje> findByUser(String userID) {
-		return em.createQuery("select m from Mensaje m where m.emisor = :id or m.receptor = :id")
+		return em.createQuery("select m from Mensaje m where m.emisor.numTLF = :id or m.receptor.numTLF = :id")
 				.setParameter("id", userID).getResultList();
 	}
 	
 	@Override
 	public List<Mensaje> findByEmisor(String userID) {
-		return em.createQuery("select m from Mensaje m where m.receptor = :id")
+		return em.createQuery("select m from Mensaje m where m.emisor.numTLF = :id")
 				.setParameter("id", userID).getResultList();
 	}
 	
 	@Override
 	public List<Mensaje> findByReceptor(String userID) {
-		return em.createQuery("select m from Mensaje m where m.receptor = :id")
+		return em.createQuery("select m from Mensaje m where m.receptor.numTLF = :id")
 				.setParameter("id", userID).getResultList();
 	}
 	
 	@Override
 	public List<Mensaje> findChat(String firstuser, String seconduser) {
 		return em.createQuery("SELECT m FROM Mensaje m WHERE " +
-		        "(m.emisor.id = :first AND m.receptor.id = :second) OR " +
-		        "(m.emisor.id = :second AND m.receptor.id = :first)")
+		        "(m.emisor.numTLF = :first AND m.receptor.numTLF = :second) OR " +
+		        "(m.emisor.numTLF = :second AND m.receptor.numTLF = :first)")
 		        .setParameter("first", firstuser)
 		        .setParameter("second", seconduser)
 		        .getResultList();
@@ -54,7 +54,7 @@ public class MensajeRepository implements MensajeDAO {
 	
 	@Override
 	public List<Mensaje> findByUserAndText(String userID, String text) {
-		return em.createQuery("select m from Mensaje m where (m.emisor = :id or m.receptor = :id) and m.texto like :text")
+		return em.createQuery("select m from Mensaje m where (m.emisor.numTLF = :id or m.receptor.numTLF = :id) and m.texto like :text")
 				.setParameter("id", userID).setParameter("text", "%" + text + "%").getResultList();
 	}
 

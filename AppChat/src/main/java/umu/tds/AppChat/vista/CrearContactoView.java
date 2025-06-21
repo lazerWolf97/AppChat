@@ -15,6 +15,9 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import umu.tds.AppChat.controller.CrearContactoController;
+
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 
@@ -23,28 +26,20 @@ public class CrearContactoView {
 	private JFrame frmCrearContacto;
 	private JTextField textField_tlf;
 	private JTextField textField_nombre;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CrearContactoView window = new CrearContactoView();
-					window.frmCrearContacto.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
+	private CrearContactoController controller;
 
 	/**
 	 * Create the application.
 	 */
-	public CrearContactoView() {
+	public CrearContactoView(CrearContactoController controller) {
+		this.controller = controller;
 		initialize();
+	}
+	
+	public void showWindow() {
+		frmCrearContacto.setVisible(true);
+		frmCrearContacto.setLocationRelativeTo(null);
 	}
 
 	/**
@@ -64,7 +59,7 @@ public class CrearContactoView {
 		
 		JLabel lblIcon = new JLabel("");
 		panel.add(lblIcon);
-		ImageIcon pfp = new ImageIcon(getClass().getResource("/images/usuario.png"));
+		ImageIcon pfp = new ImageIcon(getClass().getResource("/images/plususuario.png"));
 		lblIcon.setIcon(new ImageIcon(pfp.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
 		
 		JPanel panel_1 = new JPanel();
