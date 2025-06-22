@@ -32,12 +32,15 @@ public class PerfilController {
 		view.showWindow();
 	}
 	
-	public void actualizar(String nombre, String email, LocalDate fechan) {
+	public void actualizar(String nombre, String email, LocalDate fechan, String password) {
 		if(nombre.length() > 0) {
 			CurrentSession.getUsuarioActual().setNombre(nombre);
 		}
 		if(email.length() > 0) {
 			CurrentSession.getUsuarioActual().setEmail(email);
+		}
+		if(password.length() > 0) {
+			CurrentSession.getUsuarioActual().setPassword(password);
 		}
 		CurrentSession.getUsuarioActual().setFnacimiento(fechan);
 		

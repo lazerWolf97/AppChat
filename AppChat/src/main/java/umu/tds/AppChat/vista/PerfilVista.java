@@ -38,6 +38,7 @@ public class PerfilVista {
 	private PerfilController controller;
 	
 	private PerfilListener listener;
+	private JTextField textField_password;
 
 	/**
 	 * Create the application.
@@ -97,7 +98,7 @@ public class PerfilVista {
 		gbl_panel_2.columnWidths = new int[]{0, 0, 0};
 		gbl_panel_2.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
 		gbl_panel_2.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_panel_2.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_2.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_2.setLayout(gbl_panel_2);
 		
 		JLabel lblNewLabel = new JLabel("Nombre");
@@ -151,6 +152,23 @@ public class PerfilVista {
 		gbc_dateChooser.gridy = 2;
 		panel_2.add(dateChooser, gbc_dateChooser);
 		
+		JLabel lblNewLabel_2 = new JLabel("Contraseña");
+		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
+		gbc_lblNewLabel_2.anchor = GridBagConstraints.NORTHEAST;
+		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_2.gridx = 0;
+		gbc_lblNewLabel_2.gridy = 3;
+		panel_2.add(lblNewLabel_2, gbc_lblNewLabel_2);
+		
+		textField_password = new JTextField();
+		GridBagConstraints gbc_textField_password = new GridBagConstraints();
+		gbc_textField_password.insets = new Insets(0, 0, 5, 0);
+		gbc_textField_password.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_password.gridx = 1;
+		gbc_textField_password.gridy = 3;
+		panel_2.add(textField_password, gbc_textField_password);
+		textField_password.setColumns(10);
+		
 		JLabel lblNewLabel_3 = new JLabel("Premium");
 		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
 		gbc_lblNewLabel_3.insets = new Insets(0, 0, 0, 5);
@@ -183,7 +201,7 @@ public class PerfilVista {
 				controller.actualizar(textField_nombre.getText(), textField_email.getText(),
 						dateChooser.getDate().toInstant()
 					      .atZone(ZoneId.systemDefault())
-					      .toLocalDate());
+					      .toLocalDate(), textField_password.getText());
 				listener.updatePerfil(new PerfilEvent(this, textField_nombre.getText()));
 				frmEditarPerfil.dispose();
 			}
