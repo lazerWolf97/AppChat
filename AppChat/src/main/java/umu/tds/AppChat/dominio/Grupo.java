@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Table (name="GRUPO")
 public class Grupo extends Contacto {
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	private List<ContactoIndividual> contactos;
 	
 	public Grupo(String nombre) {

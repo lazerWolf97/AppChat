@@ -17,10 +17,13 @@ import umu.tds.AppChat.vista.GrupoView;
 public class CrearGrupoController {
 
 	private final GrupoService gService;
+	private final UsuarioService uService;
 	private final AppController controller;
 	
-	public CrearGrupoController(GrupoService gService, AppController controller) {
+	public CrearGrupoController(GrupoService gService, UsuarioService uService,
+			AppController controller) {
 		this.gService = gService;
+		this.uService = uService;
 		this.controller = controller;
 	}
 	
@@ -49,8 +52,9 @@ public class CrearGrupoController {
 	
 	public void crearGrupo(List<ContactoIndividual> lista, String nombre) {
 		Grupo g = new Grupo(nombre, lista);
-		
+		CurrentSession.getUsuarioActual().addContacto(g);
 		gService.add(g);
+		uService.update(CurrentSession.getUsuarioActual());
 	}
 	
 }

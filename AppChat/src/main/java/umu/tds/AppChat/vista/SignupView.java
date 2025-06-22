@@ -242,7 +242,7 @@ public class SignupView {
 	private void addManejadorAceptar(JButton btn_aceptar) {
 		btn_aceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Registro Foto
+				
 				try {
 					controller.register(textField_telefono.getText(), textField_nombre.getText(),
 							textField_email.getText(), new String(passwordField.getPassword()), 

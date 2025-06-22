@@ -24,12 +24,14 @@ import javax.swing.JLabel;
 import javax.swing.border.TitledBorder;
 
 import umu.tds.AppChat.controller.ChatController;
+import umu.tds.AppChat.controller.MensajeGrupoController;
 import umu.tds.AppChat.dominio.Contacto;
 import umu.tds.AppChat.dominio.ContactoIndividual;
 import umu.tds.AppChat.dominio.Grupo;
 import umu.tds.AppChat.dominio.Mensaje;
 import umu.tds.AppChat.vista.observer.AbrirChatEvent;
 import umu.tds.AppChat.vista.observer.ChatListener;
+import umu.tds.AppChat.vista.observer.GrupoListener;
 import umu.tds.AppChat.vista.observer.MensajeEvent;
 import umu.tds.AppChat.vista.observer.PerfilEvent;
 import umu.tds.AppChat.vista.observer.PerfilListener;
@@ -40,7 +42,7 @@ import javax.swing.JScrollBar;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JList;
 
-public class MainView implements PerfilListener, ChatListener {
+public class MainView implements PerfilListener, ChatListener, GrupoListener {
 
 	private JFrame frmAppchat;
 	private JPanel panel_chat;
@@ -175,8 +177,11 @@ public class MainView implements PerfilListener, ChatListener {
 					ContactoIndividual ci = (ContactoIndividual) c;
 					mostrarChat(ci.getNombre(), ci.getNumTLF());
 				}
-				// TODO ENVIAR MENSAJE A GRUPO
 				
+				if(c instanceof Grupo) {
+					Grupo g = (Grupo) c;
+					controller.mostrarMensajeGrupo(g);
+				}
 			}
 		});
 	}
@@ -199,8 +204,9 @@ public class MainView implements PerfilListener, ChatListener {
 		for(Mensaje m : listaChats) {
 			boolean isEmisor = m.getEmisor().compararTLF(controller.getCurrentNumber());
 			String contacto = isEmisor ? m.getReceptor().getNumTLF() : m.getEmisor().getNumTLF();
+			String nombre = isEmisor ? m.getReceptor().getNombre() : m.getEmisor().getNombre();
 			ChatPreviewPanel preview = new ChatPreviewPanel(m.getTexto(),
-					contacto, m.getFechaHora(), isEmisor);
+					contacto, nombre, m.getFechaHora(), isEmisor, controller);
 			listaPanel.add(preview);
 		}
 		
@@ -225,6 +231,7 @@ public class MainView implements PerfilListener, ChatListener {
 		for (Component c : panel_chat.getComponents()) {
 		    if (c instanceof ChatPanel cp) {
 		        cp.agregarMensaje(e.getMensaje(), e.getFecha().format(formatter), true);
+		        mostrarListaChats();
 		    }
 		}
 	}
@@ -233,7 +240,11 @@ public class MainView implements PerfilListener, ChatListener {
 	public void recibirMensaje(MensajeEvent e) {
 		for (Component c : panel_chat.getComponents()) {
 		    if (c instanceof ChatPanel cp) {
-		       cp.agregarMensaje(e.getMensaje(), e.getFecha().format(formatter), false);
+		    	if(cp.getTLFContacto().compareTo(e.getEmisor()) == 0) {
+		    		cp.agregarMensaje(e.getMensaje(), e.getFecha().format(formatter), false);
+		    	}
+		    	
+		    	mostrarListaChats();
 		    }
 		}
 	}
@@ -241,6 +252,18 @@ public class MainView implements PerfilListener, ChatListener {
 	@Override
 	public void abrirChat(AbrirChatEvent e) {
 		mostrarChat(e.getNombre(), e.getNumTLF());
+	}
+
+	@Override
+	public void enviarMensajeGrupo(MensajeEvent e) {
+		for (Component c : panel_chat.getComponents()) {
+		    if (c instanceof ChatPanel cp) {
+		        cp.agregarMensaje(e.getMensaje(), e.getFecha().format(formatter), true);
+		    }
+		}
+		panel_chat.revalidate();
+		panel_chat.repaint();
+		mostrarListaChats();
 	}
 
 }

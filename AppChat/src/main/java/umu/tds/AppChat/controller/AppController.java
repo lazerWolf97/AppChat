@@ -5,7 +5,9 @@ import javax.swing.JFrame;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import umu.tds.AppChat.dominio.Grupo;
 import umu.tds.AppChat.service.*;
+import umu.tds.AppChat.vista.observer.GrupoListener;
 import umu.tds.AppChat.vista.observer.PerfilListener;
 
 @Component
@@ -47,7 +49,7 @@ public class AppController {
     }
     
     public void mostrarCrearGrupo() {
-    	CrearGrupoController grupoController = new CrearGrupoController(gService, this);
+    	CrearGrupoController grupoController = new CrearGrupoController(gService, uService, this);
     	grupoController.initialize();
     }
     
@@ -61,5 +63,12 @@ public class AppController {
     	PerfilController perfilController = new PerfilController(uService, this);
     	perfilController.setListener(listener);
     	perfilController.initialize();
+    }
+    
+    public void mostrarMensajeGrupo(Grupo g, GrupoListener gl) {
+    	MensajeGrupoController mgController = new MensajeGrupoController(uService, mService, gService);
+    	mgController.setGrupo(g);
+    	mgController.addListener(gl);
+    	mgController.initialize();
     }
 }

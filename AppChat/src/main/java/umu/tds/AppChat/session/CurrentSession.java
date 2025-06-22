@@ -22,4 +22,8 @@ public class CurrentSession {
 		usuarioActual = null;
 	}
 	
+	public static String getIDActual() {
+		return usuarioActual.getNumTLF();
+	}
+	
 }

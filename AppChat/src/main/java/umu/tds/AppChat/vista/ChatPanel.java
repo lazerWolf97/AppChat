@@ -137,4 +137,8 @@ public class ChatPanel extends JPanel {
         JScrollPane scrollPane = (JScrollPane) getComponent(2);
         return scrollPane.getVerticalScrollBar();
     }
+    
+    public String getTLFContacto() {
+    	return contactoTLF;
+    }
 }

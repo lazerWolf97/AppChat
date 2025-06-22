@@ -12,6 +12,9 @@ import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
+
+import umu.tds.AppChat.controller.ChatController;
+
 import java.awt.Color;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
@@ -20,17 +23,23 @@ public class ChatPreviewPanel extends JPanel {
 
 	private String contacto;
 	private String mensaje;
+	private String nombre;
 	private boolean isEmisor;
 	private LocalDateTime fecha;
+	
+	private ChatController controller;
 	
 	private DateTimeFormatter formatter = DateTimeFormatter
 			.ofPattern("[dd/MM/yyyy] HH:mm");
 	
-	public ChatPreviewPanel(String mensaje, String contacto, LocalDateTime fecha, boolean isEmisor) {
+	public ChatPreviewPanel(String mensaje, String contacto, String nombre, LocalDateTime fecha,
+			boolean isEmisor, ChatController controller) {
 		this.contacto = contacto;
 		this.mensaje = mensaje;
 		this.fecha = fecha;
 		this.isEmisor = isEmisor;
+		this.controller = controller;
+		this.nombre = nombre;
 		initialize();
 	}
 
@@ -64,14 +73,16 @@ public class ChatPreviewPanel extends JPanel {
 		JLabel lbl_fecha = new JLabel(fecha.format(formatter));
 		panel_1.add(lbl_fecha, BorderLayout.WEST);
 		
-		JButton btn_abrirchat = new JButton("Abrir Chat");
-		panel_1.add(btn_abrirchat, BorderLayout.EAST);
+		JButton btn_abrir = new JButton("Abrir Chat");
+		panel_1.add(btn_abrir, BorderLayout.EAST);
+		
+		addManejadorAbrir(btn_abrir);
 	}
 	
-	private void addManejadorAbrir(JButton btn_abrirchat) {
-		btn_abrirchat.addActionListener(new ActionListener() {
+	private void addManejadorAbrir(JButton btn_abrir) {
+		btn_abrir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				controller.abrirChat(contacto, nombre);
 			}
 		});
 	}

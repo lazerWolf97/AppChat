@@ -7,11 +7,13 @@ public class MensajeEvent extends EventObject {
 	
 	private LocalDateTime fecha;
 	private String mensaje;
+	private String emisor;
 	
-	public MensajeEvent(Object source, LocalDateTime fecha, String mensaje) {
+	public MensajeEvent(Object source, LocalDateTime fecha, String mensaje, String emisor) {
 		super(source);
 		this.mensaje = mensaje;
 		this.fecha = fecha;
+		this.emisor = emisor;
 	}
 	
 	public LocalDateTime getFecha() {
@@ -20,6 +22,10 @@ public class MensajeEvent extends EventObject {
 	
 	public String getMensaje() {
 		return mensaje;
+	}
+	
+	public String getEmisor() {
+		return emisor;
 	}
 	
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import umu.tds.AppChat.dominio.Contacto;
 import umu.tds.AppChat.dominio.ContactoIndividual;
+import umu.tds.AppChat.dominio.Grupo;
 import umu.tds.AppChat.dominio.Mensaje;
 import umu.tds.AppChat.dominio.Usuario;
 import umu.tds.AppChat.service.ContactoIndividualService;
@@ -17,6 +18,7 @@ import umu.tds.AppChat.service.MensajeService;
 import umu.tds.AppChat.service.UsuarioService;
 import umu.tds.AppChat.session.CurrentSession;
 import umu.tds.AppChat.vista.MainView;
+import umu.tds.AppChat.vista.observer.AbrirChatEvent;
 import umu.tds.AppChat.vista.observer.ChatListener;
 import umu.tds.AppChat.vista.observer.MensajeEvent;
 import umu.tds.AppChat.vista.observer.PerfilListener;
@@ -32,6 +34,7 @@ public class ChatController {
 	
 	private PerfilListener listener;
 	private List<ChatListener> chatListeners;
+	private MainView view;
 	
 	public ChatController(UsuarioService uService, MensajeService mService,
 			GrupoService gService, ContactoIndividualService cService ,AppController controller) {
@@ -44,7 +47,7 @@ public class ChatController {
 	}
 	
 	public void initialize() {
-		MainView view = new MainView(this);
+		view = new MainView(this);
 		view.showWindow();
 	}
 	
@@ -66,6 +69,10 @@ public class ChatController {
 	
 	public void mostrarPerfil(PerfilListener listener) {
 		controller.mostrarPerfil(listener);
+	}
+	
+	public void mostrarMensajeGrupo(Grupo g) {
+		controller.mostrarMensajeGrupo(g, view);
 	}
 	
 	public List<Mensaje> getMensajes(){
@@ -108,13 +115,18 @@ public class ChatController {
 		mensajeEnviado(texto, fecha);
 	}
 	
-	private void mensajeRecibido(String mensaje, LocalDateTime fecha) {
-		MensajeEvent e = new MensajeEvent(this, fecha, mensaje);
+	public void abrirChat(String telefono, String nombre) {
+		AbrirChatEvent e = new AbrirChatEvent(this, telefono, nombre);
+		chatListeners.forEach(l -> l.abrirChat(e));
+	}
+	
+	private void mensajeRecibido(String mensaje, LocalDateTime fecha, String emisor) {
+		MensajeEvent e = new MensajeEvent(this, fecha, mensaje, emisor);
 		chatListeners.forEach(l -> l.recibirMensaje(e));
 	}
 	
 	private void mensajeEnviado(String mensaje, LocalDateTime fecha) {
-		MensajeEvent e = new MensajeEvent(this, fecha, mensaje);
+		MensajeEvent e = new MensajeEvent(this, fecha, mensaje, CurrentSession.getIDActual());
 		chatListeners.forEach(l -> l.enviarMensaje(e));
 	}
 	
