@@ -40,21 +40,9 @@ public class CrearContactoController {
 		if(u.isEmpty())
 			throw new UserException("No existe ningún usuario con ese teléfono.", UserErrorType.USERNOTFOUND);
 		
-		for(Contacto c : CurrentSession.getUsuarioActual().getContactos()) {
-			if(c instanceof ContactoIndividual) {
-				ContactoIndividual ci = (ContactoIndividual) c;
-				if(ci.getNumTLF().compareTo(telefono) == 0) {
-					ci.setNombre(nombre);
-					cService.update(ci);
-					uService.update(CurrentSession.getUsuarioActual());
-					return;
-				}
-			}
-		}
+		ContactoIndividual c = CurrentSession.getUsuarioActual().crearContacto(nombre, u.get());
 		
-		ContactoIndividual c = new ContactoIndividual(nombre, u.get());
-		CurrentSession.getUsuarioActual().addContacto(c);
-		cService.add(c);
+		cService.addOrUpdate(c);
 		uService.update(CurrentSession.getUsuarioActual());
 	}
 	

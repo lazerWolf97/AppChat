@@ -51,8 +51,7 @@ public class CrearGrupoController {
 	}
 	
 	public void crearGrupo(List<ContactoIndividual> lista, String nombre) {
-		Grupo g = new Grupo(nombre, lista);
-		CurrentSession.getUsuarioActual().addContacto(g);
+		Grupo g = CurrentSession.getUsuarioActual().crearGrupo(nombre, lista);
 		gService.add(g);
 		uService.update(CurrentSession.getUsuarioActual());
 	}

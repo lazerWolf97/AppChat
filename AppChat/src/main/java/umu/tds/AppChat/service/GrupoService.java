@@ -11,4 +11,5 @@ public interface GrupoService {
 	public void add(Grupo g);
 	public void delete(String ID);
 	public void update(Grupo g);
+	public void addOrUpdate(Grupo g);
 }

@@ -3,6 +3,7 @@ package umu.tds.AppChat.service;
 import java.util.List;
 
 import umu.tds.AppChat.dominio.ContactoIndividual;
+import umu.tds.AppChat.dominio.Grupo;
 
 public interface ContactoIndividualService {
 
@@ -12,4 +13,5 @@ public interface ContactoIndividualService {
 	public void add(ContactoIndividual c);
 	public void delete(String ID);
 	public void update(ContactoIndividual c);
+	public void addOrUpdate(ContactoIndividual c);
 }

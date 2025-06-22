@@ -45,5 +45,15 @@ public class GrupoApp implements GrupoService {
 	public void update(Grupo g) {
 		repository.update(g);
 	}
+
+	@Override
+	public void addOrUpdate(Grupo g) {
+		if(g.getID() == null) {
+			repository.add(g);
+		}
+		else {
+			repository.update(g);
+		}
+	}
 	
 }

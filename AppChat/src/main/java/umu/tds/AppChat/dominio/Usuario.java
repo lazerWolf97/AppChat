@@ -229,4 +229,29 @@ public class Usuario {
 	public boolean compararTLF(String ntlf) {
 		return numTLF.compareTo(ntlf) == 0;
 	}
+	
+	public ContactoIndividual crearContacto(String nombre, Usuario contacto) {
+		Optional<Contacto> copt = contactos.stream()
+				.filter(c -> c instanceof ContactoIndividual ci 
+						&& ci.getNumTLF().compareTo(contacto.getNumTLF()) == 0)
+				.findFirst();
+		
+		if(copt.isPresent()) {
+			ContactoIndividual ci = (ContactoIndividual) copt.get();
+			ci.setNombre(nombre);
+			return ci;
+		}
+		else {
+			ContactoIndividual ci = new ContactoIndividual(nombre, contacto);
+			contactos.add(ci);
+			return ci;
+		}
+	}
+	
+	public Grupo crearGrupo(String nombre, List<ContactoIndividual> contactos) {
+		Grupo g = new Grupo(nombre, contactos);
+		this.contactos.add(g);
+		return g;
+	}
+	
 }
