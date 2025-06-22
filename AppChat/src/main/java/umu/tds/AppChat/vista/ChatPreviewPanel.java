@@ -49,9 +49,6 @@ public class ChatPreviewPanel extends JPanel {
 		setLayout(new BorderLayout());
 		setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
 		
-		JLabel lbl_icon = new JLabel("New label");
-		add(lbl_icon, BorderLayout.WEST);
-		
 		JLabel lbl_contacto = new JLabel(contacto);
 		add(lbl_contacto, BorderLayout.NORTH);
 		

@@ -39,8 +39,11 @@ public class ChatPanel extends JPanel {
         panel_contacto.setBorder(new CompoundBorder(new LineBorder(Color.BLACK, 2, true), new EmptyBorder(4, 4, 4, 4)));
         add(panel_contacto, BorderLayout.NORTH);
 
-        JLabel lbl_iconocontacto = new JLabel("[Icono]");
+        JLabel lbl_iconocontacto = new JLabel("");
         panel_contacto.add(lbl_iconocontacto, BorderLayout.WEST);
+        
+        ImageIcon pfp = new ImageIcon(getClass().getResource("/images/usuario.png"));
+		lbl_iconocontacto.setIcon(new ImageIcon(pfp.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
         JLabel lbl_nombre = new JLabel(contactoNombre);
         panel_contacto.add(lbl_nombre, BorderLayout.CENTER);
