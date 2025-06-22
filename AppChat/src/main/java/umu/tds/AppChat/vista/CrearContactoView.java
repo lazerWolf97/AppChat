@@ -6,8 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JButton;
-import java.awt.Component;
-import javax.swing.Box;
 import javax.swing.JLabel;
 import java.awt.GridBagLayout;
 import java.awt.Image;

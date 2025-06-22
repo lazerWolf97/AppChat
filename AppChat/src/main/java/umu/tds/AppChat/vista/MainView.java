@@ -1,9 +1,7 @@
 package umu.tds.AppChat.vista;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -15,16 +13,13 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.BoxLayout;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.Component;
 import javax.swing.Box;
-import javax.swing.JLabel;
 import javax.swing.border.TitledBorder;
 
 import umu.tds.AppChat.controller.ChatController;
-import umu.tds.AppChat.controller.MensajeGrupoController;
 import umu.tds.AppChat.dominio.Contacto;
 import umu.tds.AppChat.dominio.ContactoIndividual;
 import umu.tds.AppChat.dominio.Grupo;
@@ -36,11 +31,8 @@ import umu.tds.AppChat.vista.observer.MensajeEvent;
 import umu.tds.AppChat.vista.observer.PerfilEvent;
 import umu.tds.AppChat.vista.observer.PerfilListener;
 
-import javax.swing.border.EtchedBorder;
 import javax.swing.JScrollPane;
-import javax.swing.JScrollBar;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.JList;
 
 public class MainView implements PerfilListener, ChatListener, GrupoListener {
 

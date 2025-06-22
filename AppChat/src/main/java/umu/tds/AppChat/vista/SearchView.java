@@ -1,6 +1,5 @@
 package umu.tds.AppChat.vista;
 
-import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,7 +27,6 @@ import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.Box;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
@@ -157,10 +155,12 @@ public class SearchView {
 		JPanel listaPanel = new JPanel();
 		listaPanel.setLayout(new BoxLayout(listaPanel, BoxLayout.Y_AXIS));
 		if(comboBox.getSelectedIndex() == 1)
-			listaMensajes = controller.buscarMensajesPorNumero(textField_texto.getText(), text_nombre.getText());
+			controller.setMetodoBusqueda("NUMERO");
 		else
-			listaMensajes = controller.buscarMensajesPorContacto(textField_texto.getText(), text_nombre.getText());
-			
+			controller.setMetodoBusqueda("CONTACTO");
+		
+		listaMensajes = controller.buscarMensajes(textField_texto.getText(), text_nombre.getText());
+		
 		for(Mensaje m : listaMensajes) {
 			MensajePanel mp = new MensajePanel(m.getTexto(), m.getEmisor().getNumTLF(), m.getReceptor().getNumTLF(), m.getFechaHora());
 			listaPanel.add(mp);

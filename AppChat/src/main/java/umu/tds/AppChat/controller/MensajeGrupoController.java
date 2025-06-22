@@ -8,35 +8,26 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import umu.tds.AppChat.dominio.Contacto;
 import umu.tds.AppChat.dominio.ContactoIndividual;
 import umu.tds.AppChat.dominio.Grupo;
 import umu.tds.AppChat.dominio.Mensaje;
-import umu.tds.AppChat.service.GrupoService;
 import umu.tds.AppChat.service.MensajeService;
-import umu.tds.AppChat.service.UsuarioService;
 import umu.tds.AppChat.session.CurrentSession;
 import umu.tds.AppChat.vista.MensajeGrupoView;
-import umu.tds.AppChat.vista.observer.ChatListener;
 import umu.tds.AppChat.vista.observer.GrupoListener;
 import umu.tds.AppChat.vista.observer.MensajeEvent;
 
 @Component
 public class MensajeGrupoController {
 
-	private final UsuarioService uService;
 	private final MensajeService mService;
-	private final GrupoService gService;
 	
 	private Grupo grupo;
 	
 	private List<GrupoListener> listeners = new LinkedList<GrupoListener>();
 	
-	public MensajeGrupoController(UsuarioService uService, MensajeService mService,
-			GrupoService gService) {
-		this.uService = uService;
+	public MensajeGrupoController(MensajeService mService) {
 		this.mService = mService;
-		this.gService = gService;
 	}
 	
 	public void initialize() {

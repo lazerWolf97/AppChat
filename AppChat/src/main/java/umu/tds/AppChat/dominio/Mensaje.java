@@ -3,7 +3,6 @@ package umu.tds.AppChat.dominio;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 import javax.persistence.*;
 

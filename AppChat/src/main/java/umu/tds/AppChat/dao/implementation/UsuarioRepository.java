@@ -9,7 +9,6 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import umu.tds.AppChat.dao.UsuarioDAO;
-import umu.tds.AppChat.dominio.Contacto;
 import umu.tds.AppChat.dominio.Usuario;
 
 @Repository

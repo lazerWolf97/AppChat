@@ -3,15 +3,12 @@ package umu.tds.AppChat.vista;
 import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import umu.tds.AppChat.controller.ChatController;
 import umu.tds.AppChat.dominio.Mensaje;
 import umu.tds.AppChat.session.CurrentSession;
-import umu.tds.exceptions.UserException;
 
 public class ChatPanel extends JPanel {
 

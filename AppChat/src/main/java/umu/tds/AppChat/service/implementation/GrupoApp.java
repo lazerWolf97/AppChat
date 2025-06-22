@@ -1,6 +1,5 @@
 package umu.tds.AppChat.service.implementation;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

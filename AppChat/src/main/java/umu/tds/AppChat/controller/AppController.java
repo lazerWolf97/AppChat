@@ -1,7 +1,5 @@
 package umu.tds.AppChat.controller;
 
-import javax.swing.JFrame;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -44,7 +42,7 @@ public class AppController {
     }
     
     public void mostrarSearch() {
-    	SearchController searchController = new SearchController(uService, mService, cService, this);
+    	SearchController searchController = new SearchController(uService, mService);
     	searchController.initialize();
     }
     
@@ -60,13 +58,13 @@ public class AppController {
     }
     
     public void mostrarPerfil(PerfilListener listener) {
-    	PerfilController perfilController = new PerfilController(uService, this);
+    	PerfilController perfilController = new PerfilController(uService);
     	perfilController.setListener(listener);
     	perfilController.initialize();
     }
     
     public void mostrarMensajeGrupo(Grupo g, GrupoListener gl) {
-    	MensajeGrupoController mgController = new MensajeGrupoController(uService, mService, gService);
+    	MensajeGrupoController mgController = new MensajeGrupoController(mService);
     	mgController.setGrupo(g);
     	mgController.addListener(gl);
     	mgController.initialize();

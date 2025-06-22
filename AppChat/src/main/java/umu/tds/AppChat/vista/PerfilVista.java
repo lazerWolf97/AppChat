@@ -1,6 +1,5 @@
 package umu.tds.AppChat.vista;
 
-import java.awt.EventQueue;
 import java.awt.Image;
 
 import javax.swing.JFrame;
@@ -10,7 +9,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.BoxLayout;
 import java.awt.Component;
 import javax.swing.border.EmptyBorder;
@@ -23,7 +21,6 @@ import java.time.ZoneId;
 import java.util.Calendar;
 
 import javax.swing.JTextField;
-import javax.swing.JTextArea;
 import com.toedter.calendar.JDateChooser;
 
 import umu.tds.AppChat.controller.PerfilController;

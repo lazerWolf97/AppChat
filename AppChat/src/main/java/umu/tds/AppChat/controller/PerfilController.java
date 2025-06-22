@@ -14,14 +14,12 @@ import umu.tds.AppChat.vista.observer.PerfilListener;
 public class PerfilController {
 
 	private final UsuarioService uService;
-	private final AppController controller;
 	
 	private PerfilListener listener;
 	
 	@Autowired
-	public PerfilController(UsuarioService uService, AppController controller) {
+	public PerfilController(UsuarioService uService) {
 		this.uService = uService;
-		this.controller = controller;
 		
 	}
 	

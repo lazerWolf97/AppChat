@@ -1,26 +1,21 @@
 package umu.tds.AppChat.vista;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.Image;
+
 import javax.swing.JLabel;
-import javax.swing.BoxLayout;
-import javax.swing.JTextField;
-import java.awt.Component;
 import javax.swing.border.EmptyBorder;
 
 import umu.tds.AppChat.controller.MensajeGrupoController;
-import umu.tds.AppChat.dominio.Grupo;
 
-import javax.swing.JList;
-import javax.swing.Box;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
-import javax.swing.JComboBox;
 
 public class MensajeGrupoView {
 
@@ -51,7 +46,9 @@ public class MensajeGrupoView {
 		JPanel panel = new JPanel();
 		frmEnviarMensajeA.getContentPane().add(panel, BorderLayout.WEST);
 		
-		JLabel lbl_icon = new JLabel("New label");
+		JLabel lbl_icon = new JLabel("");
+		ImageIcon pfp = new ImageIcon(getClass().getResource("/images/enviar.png"));
+		lbl_icon.setIcon(new ImageIcon(pfp.getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH)));
 		panel.add(lbl_icon);
 		
 		JPanel panel_1 = new JPanel();

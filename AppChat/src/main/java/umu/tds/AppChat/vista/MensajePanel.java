@@ -1,10 +1,8 @@
 package umu.tds.AppChat.vista;
 
-import java.awt.EventQueue;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.border.EmptyBorder;

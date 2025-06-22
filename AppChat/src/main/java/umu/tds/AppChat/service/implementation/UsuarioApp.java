@@ -8,9 +8,6 @@ import org.springframework.stereotype.Service;
 
 import umu.tds.AppChat.dao.UsuarioDAO;
 import umu.tds.AppChat.dominio.CatalogoUsuarios;
-import umu.tds.AppChat.dominio.Contacto;
-import umu.tds.AppChat.dominio.ContactoIndividual;
-import umu.tds.AppChat.dominio.Grupo;
 import umu.tds.AppChat.dominio.Usuario;
 import umu.tds.AppChat.service.UsuarioService;
 import umu.tds.exceptions.UserException;

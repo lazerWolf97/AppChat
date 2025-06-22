@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import umu.tds.AppChat.dao.ContactoIndividualDAO;
 import umu.tds.AppChat.dominio.ContactoIndividual;
-import umu.tds.AppChat.dominio.Grupo;
 import umu.tds.AppChat.service.ContactoIndividualService;
 import umu.tds.exceptions.UserException;
 import umu.tds.exceptions.UserException.UserErrorType;

@@ -1,7 +1,5 @@
 package umu.tds.AppChat.vista;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -18,27 +16,21 @@ import javax.swing.JTextField;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Calendar;
-import java.util.Date;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import java.awt.Font;
-import javax.swing.JTextArea;
 import com.toedter.calendar.JDateChooser;
 
 import umu.tds.AppChat.controller.SignupController;
 import umu.tds.exceptions.UserException;
 
-import javax.swing.SwingConstants;
 import javax.swing.JPasswordField;
 import javax.swing.border.CompoundBorder;
 import java.awt.Component;
 import javax.swing.ImageIcon;
-import javax.swing.JScrollPane;
 
 public class SignupView {
 
@@ -51,8 +43,6 @@ public class SignupView {
 	private JPasswordField passwordField;
 	private JPasswordField passwordField_confirmar;
 	private JDateChooser date_fechan;
-	
-	private File imagenseleccionada;
 
 
 	/**

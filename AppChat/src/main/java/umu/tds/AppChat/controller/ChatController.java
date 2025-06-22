@@ -1,7 +1,6 @@
 package umu.tds.AppChat.controller;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -42,7 +41,6 @@ public class ChatController {
 	private final ContactoIndividualService cService;
 	private final AppController controller;
 	
-	private PerfilListener listener;
 	private List<ChatListener> chatListeners;
 	private MainView view;
 	
@@ -180,6 +178,7 @@ public class ChatController {
 		
 		uService.update(CurrentSession.getUsuarioActual());
 	}
+	
 	
 	private void mensajeRecibido(String mensaje, LocalDateTime fecha, String emisor) {
 		MensajeEvent e = new MensajeEvent(this, fecha, mensaje, emisor);

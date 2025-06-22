@@ -1,7 +1,5 @@
 package umu.tds.AppChat.vista;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
