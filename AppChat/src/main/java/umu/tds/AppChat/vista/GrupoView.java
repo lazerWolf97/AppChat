@@ -20,6 +20,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -136,13 +137,23 @@ public class GrupoView {
 	private void addManejadorAceptar(JButton btn_crear) {
 		btn_crear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				List<ContactoIndividual> lc = new LinkedList<ContactoIndividual>();
-				for(int i = 0; i < modelGrupo.getSize(); i++) {
-					lc.add(modelGrupo.get(i));
+				if(textField_nombre.getText().length() > 0) {
+					if(modelGrupo.getSize() > 0) {
+						List<ContactoIndividual> lc = new LinkedList<ContactoIndividual>();
+						for(int i = 0; i < modelGrupo.getSize(); i++) {
+							lc.add(modelGrupo.get(i));
+						}
+						controller.crearGrupo(lc, textField_nombre.getText());
+						controller.mostrarVentanaPrincipal();
+						frmAppchatCrear.dispose();
+					}
+					else {
+						JOptionPane.showMessageDialog(btn_crear, "No se puede crear un grupo vacío.");
+					}
 				}
-				controller.crearGrupo(lc, textField_nombre.getText());
-				controller.mostrarVentanaPrincipal();
-				frmAppchatCrear.dispose();
+				else {
+					JOptionPane.showMessageDialog(btn_crear, "El campo de Nombre no puede estar vacío.");
+				}
 			}
 		});
 	}

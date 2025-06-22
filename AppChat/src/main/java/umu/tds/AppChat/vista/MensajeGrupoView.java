@@ -94,7 +94,10 @@ public class MensajeGrupoView {
 	private void addManejadorEnviar(JButton btn_enviar) {
 		btn_enviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.enviarMensaje(textArea.getText());
+				if(textArea.getText().length() > 0)
+					controller.enviarMensaje(textArea.getText());
+				else
+					frmEnviarMensajeA.dispose();
 			}
 		});
 	}

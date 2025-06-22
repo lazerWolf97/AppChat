@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 
@@ -132,7 +133,13 @@ public class SearchView {
 	private void addManejadorBuscar(JButton btn_buscar) {
 		btn_buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mostrarMensajesNumero();
+				if(textField_texto.getText().length() > 0
+				&& text_nombre.getText().length() > 0) {
+					mostrarMensajesNumero();
+				}
+				else {
+					JOptionPane.showMessageDialog(btn_buscar, "No pueden haber campos vacíos.");
+				}
 				
 			}
 		});
