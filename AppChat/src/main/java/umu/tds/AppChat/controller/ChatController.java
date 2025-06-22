@@ -1,11 +1,21 @@
 package umu.tds.AppChat.controller;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Component;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import umu.tds.AppChat.dominio.Contacto;
 import umu.tds.AppChat.dominio.ContactoIndividual;
@@ -106,6 +116,44 @@ public class ChatController {
 	
 	public String getCurrentNumber() {
 		return CurrentSession.getUsuarioActual().getNumTLF();
+	}
+	
+	public boolean isPremium() {
+		return CurrentSession.getUsuarioActual().isPremium();
+	}
+	
+	public void exportarPDF(String otroTLF) {
+		File carpeta = new File("./pdf");
+		if(!carpeta.exists()) carpeta.mkdirs();
+		File archivo = new File("./pdf/" + CurrentSession.getIDActual() + "_"
+				+ otroTLF + "_" + LocalDate.now() + ".pdf");
+		DateTimeFormatter formatter = DateTimeFormatter
+    			.ofPattern("dd/MM/yyyy HH:mm");
+		if(archivo.exists()) {
+			archivo.delete();
+		}
+		try {
+			archivo.createNewFile();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		List<Mensaje> mensajes = mService.findAllByTwoUsers(CurrentSession.getIDActual(), otroTLF);
+		
+		try {
+			FileOutputStream fos = new FileOutputStream(archivo);
+			Document doc = new Document();
+			PdfWriter.getInstance(doc, fos);
+			doc.open();
+			for(Mensaje m : mensajes) {
+				doc.add(new Paragraph("[" + m.getFechaHora().format(formatter) + "] " + 
+							m.getEmisor().getNumTLF() + "\n" + m.getTexto()));
+			}
+			doc.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public void registerMensaje(String texto, String receptor, LocalDateTime fecha) {

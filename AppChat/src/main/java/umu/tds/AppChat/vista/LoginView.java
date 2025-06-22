@@ -158,7 +158,6 @@ public class LoginView {
 	private void addManejadorAceptar(JButton btn_aceptar) {
 		btn_aceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Completar login correcto
 				try {
 					controller.login(textField_tlf.getText(), new String(passwordField.getPassword()));
 					controller.mostrarVentanaPrincipal();

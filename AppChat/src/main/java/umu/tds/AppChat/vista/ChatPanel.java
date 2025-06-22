@@ -11,6 +11,7 @@ import java.util.List;
 import umu.tds.AppChat.controller.ChatController;
 import umu.tds.AppChat.dominio.Mensaje;
 import umu.tds.AppChat.session.CurrentSession;
+import umu.tds.exceptions.UserException;
 
 public class ChatPanel extends JPanel {
 
@@ -46,9 +47,17 @@ public class ChatPanel extends JPanel {
 
         JLabel lbl_nombre = new JLabel(contactoNombre);
         panel_contacto.add(lbl_nombre, BorderLayout.CENTER);
-
+        
+        JPanel panel = new JPanel();
+        panel_contacto.add(panel, BorderLayout.EAST);
+        
+        JButton btn_exportar = new JButton("Exportar PDF");
+        btn_exportar.setEnabled(controller.isPremium());
+        btn_exportar.setVisible(controller.isPremium());
+        panel.add(btn_exportar);
+        
         JLabel lbl_telefono = new JLabel(contactoTLF);
-        panel_contacto.add(lbl_telefono, BorderLayout.EAST);
+        panel.add(lbl_telefono);
 
         // Panel inferior para escribir
         JPanel panel_escribir = new JPanel(new BorderLayout());
@@ -73,11 +82,18 @@ public class ChatPanel extends JPanel {
         add(scrollPane, BorderLayout.CENTER);
         
         btnEnviar.addActionListener(e -> {
-            String texto = textField.getText().trim();
-            if (!texto.isEmpty()) {
-            	controller.registerMensaje(texto, lbl_telefono.getText(), LocalDateTime.now());
-                textField.setText("");
-            }
+        	try {
+        		String texto = textField.getText().trim();
+        		if (!texto.isEmpty()) {
+                	textField.setText("");
+        		}
+        	} catch (Exception exception) {
+        		JOptionPane.showMessageDialog(btnEnviar, exception.getMessage());
+        	}
+        });
+        
+        btn_exportar.addActionListener(e -> {
+        	controller.exportarPDF(contactoTLF);
         });
     }
 
@@ -141,4 +157,5 @@ public class ChatPanel extends JPanel {
     public String getTLFContacto() {
     	return contactoTLF;
     }
+    
 }

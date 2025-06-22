@@ -129,7 +129,7 @@ public class MainView implements PerfilListener, ChatListener, GrupoListener {
 		addManejadorAbrirChat(btn_abrirchat);
 		addManejadorPerfil(btn_perfil);
 		addManejadorNuevoGrupo(btn_nuevogrupo);
-		mostrarChat("David", "123456789");
+		mostrarChat("Bienvenido a AppChat!", "Inicio");
 		
 		mostrarListaChats();
 	}
@@ -261,6 +261,13 @@ public class MainView implements PerfilListener, ChatListener, GrupoListener {
 		        cp.agregarMensaje(e.getMensaje(), e.getFecha().format(formatter), true);
 		    }
 		}
+		panel_chat.revalidate();
+		panel_chat.repaint();
+		mostrarListaChats();
+	}
+
+	@Override
+	public void setPremium() {
 		panel_chat.revalidate();
 		panel_chat.repaint();
 		mostrarListaChats();

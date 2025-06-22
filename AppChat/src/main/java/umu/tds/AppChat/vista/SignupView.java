@@ -21,6 +21,8 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -184,6 +186,7 @@ public class SignupView {
 		panel_4.add(lbl_fechan, gbc_lbl_fechan);
 		
 		date_fechan = new JDateChooser();
+		date_fechan.setDate(Calendar.getInstance().getTime());
 		GridBagConstraints gbc_date_fechan = new GridBagConstraints();
 		gbc_date_fechan.insets = new Insets(0, 0, 5, 0);
 		gbc_date_fechan.fill = GridBagConstraints.BOTH;

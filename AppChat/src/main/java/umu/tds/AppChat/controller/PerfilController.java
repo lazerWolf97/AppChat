@@ -58,6 +58,7 @@ public class PerfilController {
 	
 	public void hacerPremium() {
 		CurrentSession.getUsuarioActual().setPremium(true);
+		listener.setPremium();
 	}
 	
 	public boolean comprobarPremium() {

@@ -1,7 +1,5 @@
 package umu.tds.AppChat.vista;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -16,7 +14,6 @@ import umu.tds.AppChat.dominio.ContactoIndividual;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.JButton;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;

@@ -20,6 +20,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.ZoneId;
+import java.util.Calendar;
 
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
@@ -145,6 +146,7 @@ public class PerfilVista {
 		panel_2.add(lbl_fecha, gbc_lbl_fecha);
 		
 		dateChooser = new JDateChooser();
+		dateChooser.setDate(Calendar.getInstance().getTime());
 		GridBagConstraints gbc_dateChooser = new GridBagConstraints();
 		gbc_dateChooser.insets = new Insets(0, 0, 5, 0);
 		gbc_dateChooser.fill = GridBagConstraints.BOTH;
