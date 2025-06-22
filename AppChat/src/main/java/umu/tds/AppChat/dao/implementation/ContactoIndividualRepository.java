@@ -1,6 +1,7 @@
 package umu.tds.AppChat.dao.implementation;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -43,7 +44,7 @@ public class ContactoIndividualRepository implements ContactoIndividualDAO {
 	}
 
 	@Override
-	public void delete(String ID) {
+	public void delete(long ID) {
 		em.createQuery("delete from ContactoIndividual c where c.id = :id")
 			.setParameter("id", ID).executeUpdate();
 	}
@@ -51,6 +52,12 @@ public class ContactoIndividualRepository implements ContactoIndividualDAO {
 	@Override
 	public void update(ContactoIndividual c) {
 		em.merge(c);
+	}
+
+	@Override
+	public Optional<ContactoIndividual> findByID(long ID) {
+		return em.createQuery("select c from ContactoIndividual c where c.id = :id")
+		.setParameter("id", ID).getResultStream().findFirst();
 	}
 	
 	

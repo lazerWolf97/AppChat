@@ -84,6 +84,7 @@ public class ChatPanel extends JPanel {
         btnEnviar.addActionListener(e -> {
         	try {
         		String texto = textField.getText().trim();
+        		controller.registerMensaje(texto, lbl_telefono.getText(), LocalDateTime.now());
         		if (!texto.isEmpty()) {
                 	textField.setText("");
         		}

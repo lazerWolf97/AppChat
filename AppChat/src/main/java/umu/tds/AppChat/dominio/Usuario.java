@@ -254,4 +254,8 @@ public class Usuario {
 		return g;
 	}
 	
+	public void eliminarContactos(Contacto c) {
+		contactos.remove(c);
+	}
+	
 }

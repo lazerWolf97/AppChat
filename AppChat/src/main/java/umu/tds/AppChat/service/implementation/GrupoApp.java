@@ -37,7 +37,7 @@ public class GrupoApp implements GrupoService {
 	}
 
 	@Override
-	public void delete(String ID) {
+	public void delete(long ID) {
 		repository.delete(ID);
 	}
 

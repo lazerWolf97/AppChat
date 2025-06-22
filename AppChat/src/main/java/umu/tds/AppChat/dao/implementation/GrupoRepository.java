@@ -1,6 +1,7 @@
 package umu.tds.AppChat.dao.implementation;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -36,13 +37,19 @@ public class GrupoRepository implements GrupoDAO {
 	}
 
 	@Override
-	public void delete(String ID) {
+	public void delete(long ID) {
 		em.createQuery("delete from Grupo g where g.id = :id").setParameter("id", ID).executeUpdate();
 	}
 
 	@Override
 	public void update(Grupo g) {
 		em.merge(g);
+	}
+
+	@Override
+	public Optional<Grupo> findByID(long ID) {
+		return em.createQuery("select g from Grupo g where g.id = :id")
+				.setParameter("id", ID).getResultStream().findFirst();
 	}
 
 }

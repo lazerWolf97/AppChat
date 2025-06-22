@@ -168,6 +168,19 @@ public class ChatController {
 		chatListeners.forEach(l -> l.abrirChat(e));
 	}
 	
+	public void eliminar(Contacto c) {
+		CurrentSession.getUsuarioActual().eliminarContactos(c);
+		chatListeners.forEach(l -> l.eliminarContacto(c));
+		if(c instanceof ContactoIndividual) {
+			cService.delete(c.getID());
+		}
+		if(c instanceof Grupo) {
+			gService.delete(c.getID());
+		}
+		
+		uService.update(CurrentSession.getUsuarioActual());
+	}
+	
 	private void mensajeRecibido(String mensaje, LocalDateTime fecha, String emisor) {
 		MensajeEvent e = new MensajeEvent(this, fecha, mensaje, emisor);
 		chatListeners.forEach(l -> l.recibirMensaje(e));

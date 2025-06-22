@@ -93,6 +93,9 @@ public class MainView implements PerfilListener, ChatListener, GrupoListener {
 		JButton btn_abrirchat = new JButton("Abrir Chat");
 		panel_funciones.add(btn_abrirchat);
 		
+		JButton btn_eliminar = new JButton("Eliminar");
+		panel_funciones.add(btn_eliminar);
+		
 		JButton btn_nuevogrupo = new JButton("Nuevo Grupo");
 		panel_funciones.add(btn_nuevogrupo);
 		
@@ -129,6 +132,7 @@ public class MainView implements PerfilListener, ChatListener, GrupoListener {
 		addManejadorAbrirChat(btn_abrirchat);
 		addManejadorPerfil(btn_perfil);
 		addManejadorNuevoGrupo(btn_nuevogrupo);
+		addManejadorEliminar(btn_eliminar);
 		mostrarChat("Bienvenido a AppChat!", "Inicio");
 		
 		mostrarListaChats();
@@ -182,6 +186,15 @@ public class MainView implements PerfilListener, ChatListener, GrupoListener {
 					Grupo g = (Grupo) c;
 					controller.mostrarMensajeGrupo(g);
 				}
+			}
+		});
+	}
+	
+	private void addManejadorEliminar(JButton btn_eliminar) {
+		btn_eliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Contacto c = (Contacto) comboBox.getSelectedItem();
+				controller.eliminar(c);
 			}
 		});
 	}
@@ -268,6 +281,18 @@ public class MainView implements PerfilListener, ChatListener, GrupoListener {
 
 	@Override
 	public void setPremium() {
+		panel_chat.revalidate();
+		panel_chat.repaint();
+		mostrarListaChats();
+	}
+
+	@Override
+	public void eliminarContacto(Contacto c) {
+		comboBox.removeAllItems();
+		controller.getContactos().stream().forEach(ct -> comboBox.addItem(ct));
+		
+		frmAppchat.revalidate();
+		frmAppchat.repaint();
 		panel_chat.revalidate();
 		panel_chat.repaint();
 		mostrarListaChats();

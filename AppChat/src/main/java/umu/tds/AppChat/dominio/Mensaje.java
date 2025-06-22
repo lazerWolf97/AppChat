@@ -102,6 +102,4 @@ public class Mensaje implements Comparable<Mensaje> {
 		else return hora.compareTo(o.getHora());
 	}
 	
-	
-	
 }

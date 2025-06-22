@@ -59,7 +59,7 @@ public class GrupoView {
 		frmAppchatCrear.setResizable(false);
 		frmAppchatCrear.setTitle("AppChat - Crear grupo");
 		frmAppchatCrear.setBounds(100, 100, 640, 480);
-		frmAppchatCrear.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frmAppchatCrear.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(10, 10, 0, 10));
@@ -150,6 +150,7 @@ public class GrupoView {
 	private void addManejadorCancelar(JButton btn_cancelar) {
 		btn_cancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				controller.mostrarVentanaPrincipal();
 				frmAppchatCrear.dispose();
 			}
 		});
